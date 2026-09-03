@@ -270,24 +270,24 @@
   .ft-grid .clabel{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--amber); display:block; margin-bottom:6px;}
   .ft-grid p{font-size:12.5px; color:var(--mute);}
   
-  /* Editable textarea fields inside Full Detail grid */
-  .ft-grid textarea{
-    width:100%;
-    min-height:90px;
-    background:var(--deck);
-    border:1px solid var(--line);
-    border-radius:2px;
-    padding:8px;
-    font-family:'Inter','Noto Sans TC',sans-serif;
-    font-size:12px;
-    color:var(--ink);
-    resize:vertical;
-    line-height:1.4;
+  /* Editable fields inside fulltext grid */
+  .editable-area {
+    width: 100%;
+    min-height: 85px;
+    background: #fdfdfd;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 6px 8px;
+    font-size: 12.5px;
+    font-family: inherit;
+    color: var(--ink);
+    line-height: 1.4;
+    resize: vertical;
   }
-  .ft-grid textarea:focus{
-    outline:none;
-    border-color:var(--amber);
-    background:#fff;
+  .editable-area:focus {
+    outline: none;
+    border-color: var(--amber);
+    background: #fff;
   }
 
   @media (max-width:700px){.ft-grid{grid-template-columns:1fr;}}
@@ -511,209 +511,209 @@ const DATA = {
               ]
             }
           }
+      ],
+      narrative:{
+        title:"How the Process Works",
+        intro:"A defensible performance system is built in layers, not rolled out overnight.",
+        steps:[
+          {h:"Diagnose the gap", d:"Audit existing appraisal practices to find where subjectivity or inconsistency is costing the business."},
+          {h:"Rebuild the framework", d:"Redesign job grading and competency rubrics so every role is evaluated against the same standard."},
+          {h:"Standardize the workflow", d:"Roll out one KPI/OKR evaluation cycle across all teams, regardless of location."},
+          {h:"Connect results to decisions", d:"Wire ratings directly into merit increases, promotion tracks, and PIP triggers, with compliance built in from the start."}
         ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"A defensible performance system is built in layers, not rolled out overnight.",
-          steps:[
-            {h:"Diagnose the gap", d:"Audit existing appraisal practices to find where subjectivity or inconsistency is costing the business."},
-            {h:"Rebuild the framework", d:"Redesign job grading and competency rubrics so every role is evaluated against the same standard."},
-            {h:"Standardize the workflow", d:"Roll out one KPI/OKR evaluation cycle across all teams, regardless of location."},
-            {h:"Connect results to decisions", d:"Wire ratings directly into merit increases, promotion tracks, and PIP triggers, with compliance built in from the start."}
-          ],
-          closing:"A defensible, standardized performance system reduces the risk of disputes in a workforce that mixes technical, offshore, and onshore roles — exactly the profile Boskalis Taiwan needs to manage."
-        }
-      },
-      {
-        code:"T3",
-        title:"Training Systems & Talent Development",
-        chart:{
-          type:"doughnut",
-          title:"Measured Impact",
-          metric:{label:"Onboarding Satisfaction", value:90}
-        },
-        stories:[
-          {
-            theme:"Standardized SOP Modules for Technical Ramp-Up",
-            align:"JD 1/3 — Maintain rotations, evaluations, and support workforce readiness",
-            csum:"Long ramp-up, high early error rate",
-            asum:"Standardized technical SOP training modules",
-            rsum:"Faster ramp-up, fewer errors",
-            context:"At Nano Technology, new technical hires in engineering and manufacturing operations faced long ramp-up periods and elevated early error rates on the floor.",
-            action:"Designed standardized technical SOP training modules, integrated them into structured onboarding tracks, and linked training completion to performance evaluation.",
-            result:"Shortened technical ramp-up time and reduced operational error rates during the early tenure period.",
-            takeaway:"Directly applicable to onboarding offshore marine engineering personnel, where early competency and safety compliance are critical.",
-            gantt:{
-              title:"Training Rollout Board",
-              rows:[
-                {name:"Engineering Ops", align:[0,2], exec:[2,8]},
-                {name:"Training Team", align:[0,3], exec:[3,10]},
-                {name:"New Hire Cohort", align:[3,4], exec:[4,12]}
-              ]
-            }
-          },
-          {
-            theme:"Frontline Pulse Checks and Mentor-Based Onboarding",
-            align:"JD 1 — Maintain attendance, evaluations, and employee readiness records",
-            csum:"No early-tenure support system",
-            asum:"Pulse-check surveys + mentor program",
-            rsum:"90%+ onboarding satisfaction",
-            context:"Distributed technical teams lacked a consistent early-tenure support mechanism, risking disengagement before new hires reached full productivity.",
-            action:"Deployed frontline pulse-check surveys and a structured mentor program layered onto the SOP training roadmap.",
-            result:"Achieved a 90%+ onboarding satisfaction rate and elevated post-training performance ratings.",
-            takeaway:"A repeatable model for building technical confidence and retention among offshore-deployed or field-based engineering staff.",
-            gantt:{
-              title:"Training Rollout Board",
-              rows:[
-                {name:"HRBP Team", align:[0,1], exec:[1,12]},
-                {name:"Mentors", align:[0,2], exec:[2,12]},
-                {name:"New Hires", align:[2,3], exec:[3,10]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"Training systems only work when they are built from what actually happens on the floor.",
-          steps:[
-            {h:"Observe the floor", d:"Identify where new technical hires lose time or make errors during ramp-up."},
-            {h:"Build the SOP library", d:"Convert tribal knowledge into standardized, repeatable training modules."},
-            {h:"Layer in support", d:"Add mentor assignments and early pulse-check surveys so gaps surface before they become attrition."},
-            {h:"Close the loop", d:"Tie training completion to performance data, so the training program keeps improving itself."}
-          ],
-          closing:"In an offshore marine engineering setting, fast and safe technical ramp-up is not a nice-to-have — it directly affects safety and operational readiness."
-        }
-      },
-      {
-        code:"T4",
-        title:"Compensation, Work Rules & Compliance",
-        chart:{
-          type:"bar",
-          title:"Measured Impact",
-          metrics:[
-            {label:"On-Budget Salary Reviews", value:100},
-            {label:"Statutory Compliance (Zero Penalty)", value:100}
-          ]
-        },
-        stories:[
-          {
-            theme:"Multi-Regional C&B Benchmarking Model",
-            align:"JD 4 — Establish and maintain C&B systems and statutory benefits",
-            csum:"6 markets, diverging labor codes",
-            asum:"Regional pay model + standard payroll SOPs",
-            rsum:"Consistent, audit-ready pay decisions",
-            context:"Operating across 6 international markets at Ourbit & Bitget, statutory labor codes, payroll regulations, and pay competitiveness diverged significantly by jurisdiction.",
-            action:"Built a multi-regional compensation and benefits benchmarking model and standardized payroll and attendance SOPs across markets.",
-            result:"Enabled consistent, defensible pay decisions across all 6 markets while keeping payroll processes audit-ready.",
-            takeaway:"Directly maps to managing C&B and statutory compliance for a multinational offshore workforce operating under Taiwanese and international labor codes.",
-            gantt:{
-              title:"Compliance Cadence Board",
-              rows:[
-                {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
-                {name:"Product & Design", align:[1,3], exec:[3,11]},
-                {name:"Operations & Business", align:[2,4], exec:[4,12]}
-              ]
-            }
-          },
-          {
-            theme:"Zero-Penalty Compliance and On-Budget Salary Reviews",
-            align:"JD 4 — Maintain company work rules, statutory benefits, pensions, and HR reporting",
-            csum:"Overtime & benefits needed constant audit",
-            asum:"Recurring audits + optimized shift scheduling",
-            rsum:"100% on-budget, zero penalties",
-            context:"At Nano Technology's plant operations, working-hour tracking, overtime limits, and statutory benefit administration required continuous audit discipline.",
-            action:"Audited working hours and statutory benefits on a recurring basis, and optimized plant shift scheduling to control unnecessary overtime.",
-            result:"Executed 100% of salary reviews strictly on-budget and maintained a zero-penalty regulatory compliance record.",
-            takeaway:"Demonstrates readiness to manage statutory work-rule compliance and reporting in a regulated, safety-conscious engineering environment.",
-            gantt:{
-              title:"Compliance Cadence Board",
-              rows:[
-                {name:"Payroll", align:[0,1], exec:[1,12]},
-                {name:"Plant Ops", align:[0,2], exec:[2,12]},
-                {name:"Compliance / Legal", align:[1,2], exec:[2,12]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"Compliance is not a checklist run once a year — it is a standing operating cycle.",
-          steps:[
-            {h:"Map the regulations", d:"Catalogue statutory requirements, payroll rules, and benefit obligations across every jurisdiction in scope."},
-            {h:"Build the pay model", d:"Create a C&B structure that stays competitive locally while remaining consistent globally."},
-            {h:"Standardize operations", d:"Roll out common payroll, attendance, and work-rule SOPs so every site runs the same playbook."},
-            {h:"Audit on a cycle", d:"Run recurring compliance checks before regulators do, catching issues while they are still cheap to fix."}
-          ],
-          closing:"This process is what produced a 100% on-budget salary review cycle and a zero-penalty compliance record — the track record Boskalis Taiwan needs for a regulated, safety-first industry."
-        }
-      },
-      {
-        code:"T5",
-        title:"Talent Acquisition & Sourcing",
-        chart:{
-          type:"bar",
-          title:"Measured Impact",
-          metrics:[
-            {label:"Interview Loop Reduction", value:20},
-            {label:"Time-to-Hire Reduction", value:20},
-            {label:"Offer Acceptance Rate", value:95}
-          ],
-          stat:{val:"120+", lbl:"Hires Delivered / Year"}
-        },
-        stories:[
-          {
-            theme:"AI-Driven Sourcing Funnel for High-Volume Technical Hiring",
-            align:"JD 2 — Plan and execute talent acquisition to resolve staffing bottlenecks",
-            csum:"Fast scaling across APAC & Europe",
-            asum:"New JDs + automated sourcing + AI monitoring",
-            rsum:"120+ hires/yr, -20% time-to-hire",
-            context:"At MEXC, technical and operations headcount needed to scale quickly across APAC and Europe under tight timelines.",
-            action:"Overhauled JD architecture, built automated sourcing funnels across technical talent networks, and deployed AI diagnostics to monitor regional compensation parity.",
-            result:"Delivered 120+ hires annually, shortened interview loops by 20%, cut engineering time-to-hire by 20%, and sustained a 95%+ offer acceptance rate.",
-            takeaway:"A directly applicable playbook for resolving technical and engineering staffing bottlenecks in an offshore project environment.",
-            gantt:{
-              title:"Hiring Funnel Board",
-              rows:[
-                {name:"Talent Sourcing", align:[0,1], exec:[1,12]},
-                {name:"Hiring Mgrs — APAC", align:[1,2], exec:[2,11]},
-                {name:"Hiring Mgrs — Europe", align:[2,3], exec:[3,12]}
-              ]
-            }
-          },
-          {
-            theme:"AI Org Intelligence for Headcount and Comp Parity",
-            align:"JD 2 — Selection, hiring, and headcount planning",
-            csum:"No real-time visibility into headcount gaps",
-            asum:"AI dashboards for headcount & pay parity",
-            rsum:"95%+ offer accept, lower turnover",
-            context:"At BitMart, recruiting leadership lacked real-time visibility into headcount gaps and compensation parity across Tech, Trading, and Regional Operations.",
-            action:"Architected AI-powered org intelligence dashboards (Claude Code/LLM-based) surfacing live headcount, retention, and comp parity signals to guide sourcing priorities.",
-            result:"Sustained 95%+ offer acceptance and reduced voluntary turnover by aligning sourcing effort with the highest-risk gaps.",
-            takeaway:"Shows how data-driven recruiting infrastructure can keep offshore project staffing proactive rather than reactive.",
-            gantt:{
-              title:"Hiring Funnel Board",
-              rows:[
-                {name:"Recruiting", align:[0,1], exec:[1,12]},
-                {name:"Tech", align:[1,2], exec:[2,12]},
-                {name:"Trading", align:[1,3], exec:[3,12]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"Hitting hiring targets on a technical role is a pipeline problem before it is an interviewing problem.",
-          steps:[
-            {h:"Rebuild the JD", d:"Rewrite job descriptions around the real technical and operational requirements of the role, not generic templates."},
-            {h:"Build the funnel", d:"Stand up automated sourcing channels into technical and engineering talent networks."},
-            {h:"Monitor with data", d:"Use live dashboards to track compensation parity and time-to-hire, catching drop-off before it becomes a bottleneck."},
-            {h:"Iterate continuously", d:"Adjust sourcing and interview design based on what the data shows, not assumptions."}
-          ],
-          closing:"This is the same playbook needed to keep specialized offshore engineering roles staffed on schedule, without sacrificing candidate quality or pay competitiveness."
-        }
+        closing:"A defensible, standardized performance system reduces the risk of disputes in a workforce that mixes technical, offshore, and onshore roles — exactly the profile Boskalis Taiwan needs to manage."
       }
-    ],
-    labels:{c:"CONTEXT",a:"ACTION",r:"RESULT",tk:"TRANSFERABLE VALUE",align:"JD ALIGNMENT",fullDetail:"Full story detail",stepDetail:"Full process notes",alignPhase:"Alignment / Kickoff",execPhase:"Execution & Dashboard Tracking",weekAxis:"Quarter Timeline (Weeks)"}
+    },
+    {
+      code:"T3",
+      title:"Training Systems & Talent Development",
+      chart:{
+        type:"doughnut",
+        title:"Measured Impact",
+        metric:{label:"Onboarding Satisfaction", value:90}
+      },
+      stories:[
+        {
+          theme:"Standardized SOP Modules for Technical Ramp-Up",
+          align:"JD 1/3 — Maintain rotations, evaluations, and support workforce readiness",
+          csum:"Long ramp-up, high early error rate",
+          asum:"Standardized technical SOP training modules",
+          rsum:"Faster ramp-up, fewer errors",
+          context:"At Nano Technology, new technical hires in engineering and manufacturing operations faced long ramp-up periods and elevated early error rates on the floor.",
+          action:"Designed standardized technical SOP training modules, integrated them into structured onboarding tracks, and linked training completion to performance evaluation.",
+          result:"Shortened technical ramp-up time and reduced operational error rates during the early tenure period.",
+          takeaway:"Directly applicable to onboarding offshore marine engineering personnel, where early competency and safety compliance are critical.",
+          gantt:{
+            title:"Training Rollout Board",
+            rows:[
+              {name:"Engineering Ops", align:[0,2], exec:[2,8]},
+              {name:"Training Team", align:[0,3], exec:[3,10]},
+              {name:"New Hire Cohort", align:[3,4], exec:[4,12]}
+            ]
+          }
+        },
+        {
+          theme:"Frontline Pulse Checks and Mentor-Based Onboarding",
+          align:"JD 1 — Maintain attendance, evaluations, and employee readiness records",
+          csum:"No early-tenure support system",
+          asum:"Pulse-check surveys + mentor program",
+          rsum:"90%+ onboarding satisfaction",
+          context:"Distributed technical teams lacked a consistent early-tenure support mechanism, risking disengagement before new hires reached full productivity.",
+          action:"Deployed frontline pulse-check surveys and a structured mentor program layered onto the SOP training roadmap.",
+          result:"Achieved a 90%+ onboarding satisfaction rate and elevated post-training performance ratings.",
+          takeaway:"A repeatable model for building technical confidence and retention among offshore-deployed or field-based engineering staff.",
+          gantt:{
+            title:"Training Rollout Board",
+            rows:[
+              {name:"HRBP Team", align:[0,1], exec:[1,12]},
+              {name:"Mentors", align:[0,2], exec:[2,12]},
+              {name:"New Hires", align:[2,3], exec:[3,10]}
+            ]
+          }
+        }
+      ],
+      narrative:{
+        title:"How the Process Works",
+        intro:"Training systems only work when they are built from what actually happens on the floor.",
+        steps:[
+          {h:"Observe the floor", d:"Identify where new technical hires lose time or make errors during ramp-up."},
+          {h:"Build the SOP library", d:"Convert tribal knowledge into standardized, repeatable training modules."},
+          {h:"Layer in support", d:"Add mentor assignments and early pulse-check surveys so gaps surface before they become attrition."},
+          {h:"Close the loop", d:"Tie training completion to performance data, so the training program keeps improving itself."}
+        ],
+        closing:"In an offshore marine engineering setting, fast and safe technical ramp-up is not a nice-to-have — it directly affects safety and operational readiness."
+      }
+    },
+    {
+      code:"T4",
+      title:"Compensation, Work Rules & Compliance",
+      chart:{
+        type:"bar",
+        title:"Measured Impact",
+        metrics:[
+          {label:"On-Budget Salary Reviews", value:100},
+          {label:"Statutory Compliance (Zero Penalty)", value:100}
+        ]
+      },
+      stories:[
+        {
+          theme:"Multi-Regional C&B Benchmarking Model",
+          align:"JD 4 — Establish and maintain C&B systems and statutory benefits",
+          csum:"6 markets, diverging labor codes",
+          asum:"Regional pay model + standard payroll SOPs",
+          rsum:"Consistent, audit-ready pay decisions",
+          context:"Operating across 6 international markets at Ourbit & Bitget, statutory labor codes, payroll regulations, and pay competitiveness diverged significantly by jurisdiction.",
+          action:"Built a multi-regional compensation and benefits benchmarking model and standardized payroll and attendance SOPs across markets.",
+          result:"Enabled consistent, defensible pay decisions across all 6 markets while keeping payroll processes audit-ready.",
+          takeaway:"Directly maps to managing C&B and statutory compliance for a multinational offshore workforce operating under Taiwanese and international labor codes.",
+          gantt:{
+            title:"Compliance Cadence Board",
+            rows:[
+              {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
+              {name:"Product & Design", align:[1,3], exec:[3,11]},
+              {name:"Operations & Business", align:[2,4], exec:[4,12]}
+            ]
+          }
+        },
+        {
+          theme:"Zero-Penalty Compliance and On-Budget Salary Reviews",
+          align:"JD 4 — Maintain company work rules, statutory benefits, pensions, and HR reporting",
+          csum:"Overtime & benefits needed constant audit",
+          asum:"Recurring audits + optimized shift scheduling",
+          rsum:"100% on-budget, zero penalties",
+          context:"At Nano Technology's plant operations, working-hour tracking, overtime limits, and statutory benefit administration required continuous audit discipline.",
+          action:"Audited working hours and statutory benefits on a recurring basis, and optimized plant shift scheduling to control unnecessary overtime.",
+          result:"Executed 100% of salary reviews strictly on-budget and maintained a zero-penalty regulatory compliance record.",
+          takeaway:"Demonstrates readiness to manage statutory work-rule compliance and reporting in a regulated, safety-conscious engineering environment.",
+          gantt:{
+            title:"Compliance Cadence Board",
+            rows:[
+              {name:"Payroll", align:[0,1], exec:[1,12]},
+              {name:"Plant Ops", align:[0,2], exec:[2,12]},
+              {name:"Compliance / Legal", align:[1,2], exec:[2,12]}
+            ]
+          }
+        }
+      ],
+      narrative:{
+        title:"How the Process Works",
+        intro:"Compliance is not a checklist run once a year — it is a standing operating cycle.",
+        steps:[
+          {h:"Map the regulations", d:"Catalogue statutory requirements, payroll rules, and benefit obligations across every jurisdiction in scope."},
+          {h:"Build the pay model", d:"Create a C&B structure that stays competitive locally while remaining consistent globally."},
+          {h:"Standardize operations", d:"Roll out common payroll, attendance, and work-rule SOPs so every site runs the same playbook."},
+          {h:"Audit on a cycle", d:"Run recurring compliance checks before regulators do, catching issues while they are still cheap to fix."}
+        ],
+        closing:"This process is what produced a 100% on-budget salary review cycle and a zero-penalty compliance record — the track record Boskalis Taiwan needs for a regulated, safety-first industry."
+      }
+    },
+    {
+      code:"T5",
+      title:"Talent Acquisition & Sourcing",
+      chart:{
+        type:"bar",
+        title:"Measured Impact",
+        metrics:[
+          {label:"Interview Loop Reduction", value:20},
+          {label:"Time-to-Hire Reduction", value:20},
+          {label:"Offer Acceptance Rate", value:95}
+        ],
+        stat:{val:"120+", lbl:"Hires Delivered / Year"}
+      },
+      stories:[
+        {
+          theme:"AI-Driven Sourcing Funnel for High-Volume Technical Hiring",
+          align:"JD 2 — Plan and execute talent acquisition to resolve staffing bottlenecks",
+          csum:"Fast scaling across APAC & Europe",
+          asum:"New JDs + automated sourcing + AI monitoring",
+          rsum:"120+ hires/yr, -20% time-to-hire",
+          context:"At MEXC, technical and operations headcount needed to scale quickly across APAC and Europe under tight timelines.",
+          action:"Overhauled JD architecture, built automated sourcing funnels across technical talent networks, and deployed AI diagnostics to monitor regional compensation parity.",
+          result:"Delivered 120+ hires annually, shortened interview loops by 20%, cut engineering time-to-hire by 20%, and sustained a 95%+ offer acceptance rate.",
+          takeaway:"A directly applicable playbook for resolving technical and engineering staffing bottlenecks in an offshore project environment.",
+          gantt:{
+            title:"Hiring Funnel Board",
+            rows:[
+              {name:"Talent Sourcing", align:[0,1], exec:[1,12]},
+              {name:"Hiring Mgrs — APAC", align:[1,2], exec:[2,11]},
+              {name:"Hiring Mgrs — Europe", align:[2,3], exec:[3,12]}
+            ]
+          }
+        },
+        {
+          theme:"AI Org Intelligence for Headcount and Comp Parity",
+          align:"JD 2 — Selection, hiring, and headcount planning",
+          csum:"No real-time visibility into headcount gaps",
+          asum:"AI dashboards for headcount & pay parity",
+          rsum:"95%+ offer accept, lower turnover",
+          context:"At BitMart, recruiting leadership lacked real-time visibility into headcount gaps and compensation parity across Tech, Trading, and Regional Operations.",
+          action:"Architected AI-powered org intelligence dashboards (Claude Code/LLM-based) surfacing live headcount, retention, and comp parity signals to guide sourcing priorities.",
+          result:"Sustained 95%+ offer acceptance and reduced voluntary turnover by aligning sourcing effort with the highest-risk gaps.",
+          takeaway:"Shows how data-driven recruiting infrastructure can keep offshore project staffing proactive rather than reactive.",
+          gantt:{
+            title:"Hiring Funnel Board",
+            rows:[
+              {name:"Recruiting", align:[0,1], exec:[1,12]},
+              {name:"Tech", align:[1,2], exec:[2,12]},
+              {name:"Trading", align:[1,3], exec:[3,12]}
+            ]
+          }
+        }
+      ],
+      narrative:{
+        title:"How the Process Works",
+        intro:"Hitting hiring targets on a technical role is a pipeline problem before it is an interviewing problem.",
+        steps:[
+          {h:"Rebuild the JD", d:"Rewrite job descriptions around the real technical and operational requirements of the role, not generic templates."},
+          {h:"Build the funnel", d:"Stand up automated sourcing channels into technical and engineering talent networks."},
+          {h:"Monitor with data", d:"Use live dashboards to track compensation parity and time-to-hire, catching drop-off before it becomes a bottleneck."},
+          {h:"Iterate continuously", d:"Adjust sourcing and interview design based on what the data shows, not assumptions."}
+        ],
+        closing:"This is the same playbook needed to keep specialized offshore engineering roles staffed on schedule, without sacrificing candidate quality or pay competitiveness."
+      }
+    }
+  ],
+  labels:{c:"CONTEXT",a:"ACTION",r:"RESULT",tk:"TRANSFERABLE VALUE",align:"JD ALIGNMENT",fullDetail:"Full story detail",stepDetail:"Full process notes",alignPhase:"Alignment / Kickoff",execPhase:"Execution & Dashboard Tracking",weekAxis:"Quarter Timeline (Weeks)"}
   },
   zh: {
     candidateName: "Vicky Chen 陳薇琪",
@@ -1078,14 +1078,20 @@ function renderTabs(){
     </button>`).join('');
 }
 
-function updateStoryField(sectionIdx, storyIdx, field, value){
-  DATA[currentLang].sections[sectionIdx].stories[storyIdx][field] = value;
+function updateStoryField(tabCode, sIdx, field, value) {
+  const targetSection = DATA.en.sections.find(s => s.code === tabCode);
+  const targetSectionZh = DATA.zh.sections.find(s => s.code === tabCode);
+  if (targetSection && targetSection.stories[sIdx]) {
+    targetSection.stories[sIdx][field] = value;
+  }
+  if (targetSectionZh && targetSectionZh.stories[sIdx]) {
+    targetSectionZh.stories[sIdx][field] = value;
+  }
 }
 
 function renderMain(){
   const d = DATA[currentLang];
-  const sectionIdx = d.sections.findIndex(s => s.code === currentTab);
-  const section = d.sections[sectionIdx];
+  const section = d.sections.find(s => s.code === currentTab);
   const L = d.labels;
   const langAttr = currentLang === 'zh' ? ' lang-zh' : '';
 
@@ -1157,15 +1163,15 @@ function renderMain(){
           <div class="ft-grid">
             <div>
               <span class="clabel">${L.c}</span>
-              <textarea oninput="updateStoryField(${sectionIdx}, ${sIdx}, 'context', this.value)">${s.context}</textarea>
+              <textarea class="editable-area" oninput="updateStoryField('${section.code}', ${sIdx}, 'context', this.value)">${s.context}</textarea>
             </div>
             <div>
               <span class="clabel">${L.a}</span>
-              <textarea oninput="updateStoryField(${sectionIdx}, ${sIdx}, 'action', this.value)">${s.action}</textarea>
+              <textarea class="editable-area" oninput="updateStoryField('${section.code}', ${sIdx}, 'action', this.value)">${s.action}</textarea>
             </div>
             <div>
               <span class="clabel">${L.r}</span>
-              <textarea oninput="updateStoryField(${sectionIdx}, ${sIdx}, 'result', this.value)">${s.result}</textarea>
+              <textarea class="editable-area" oninput="updateStoryField('${section.code}', ${sIdx}, 'result', this.value)">${s.result}</textarea>
             </div>
           </div>
         </details>
