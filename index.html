@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nano Technology 績效與考核推廣看板 (Performance Rollout Board)</title>
+    <title>Nano Technology Performance Rollout Board</title>
     <style>
         * {
             box-sizing: border-box;
@@ -33,6 +33,7 @@
             font-size: 14px;
             color: #718096;
             margin-bottom: 24px;
+            line-height: 1.5;
         }
         .legend {
             display: flex;
@@ -73,7 +74,7 @@
             align-items: center;
         }
         
-        /* 視覺化進度條 (共 12 週，每週約 8.33%) */
+        /* 視覺化進度條 */
         .bar {
             position: absolute;
             height: 24px;
@@ -110,46 +111,43 @@
 <body>
 
     <div class="container">
-        <h1>Nano Technology 跨職能績效考核推廣看板</h1>
-        <p class="subtitle">交錯式跨部門導入：從 HR 對齊、主管培訓到薪酬同步，全面串聯 KPI/OKR 與薪酬、晉升及 PIP</p>
+        <h1>Nano Technology Performance Rollout Board</h1>
+        <p class="subtitle">
+            <strong>CONTEXT:</strong> Performance outcomes were not systematically tied to compensation or corrective action.<br>
+            <strong>ACTION:</strong> Staggered cross-functional rollout converging at W3 into a full-scale W12 execution & dashboard tracking phase, linking KPI/OKR workflows to salary reviews, promotions, and PIPs under full labor compliance.
+        </p>
 
         <div class="legend">
             <div class="legend-item">
                 <div class="legend-color bg-kickoff"></div>
-                <span>藍色區塊：對齊與啟動 (Alignment / Kickoff)</span>
+                <span>Alignment / Kickoff (W0-W2)</span>
             </div>
             <div class="legend-item">
                 <div class="legend-color bg-execution"></div>
-                <span>橘色區塊：執行與儀表板追蹤 (Execution & Tracking)</span>
+                <span>Execution & Dashboard Tracking (W3-W12 convergence)</span>
             </div>
         </div>
 
         <div class="timeline-grid">
             <!-- HR 團隊對齊 -->
-            <div class="group-label">HR 團隊對齊<br><span style="font-size: 11px; color: #718096;">(HR Alignment)</span></div>
+            <div class="group-label">HR Alignment<br><span style="font-size: 11px; color: #718096;">(Initiated at W0)</span></div>
             <div class="track-container">
-                <!-- W0 - W2 -->
-                <div class="bar bar-kickoff" style="left: 0%; width: 16.6%;">對齊 (W0-W2)</div>
-                <!-- W2 - W12 執行追蹤 -->
-                <div class="bar bar-execution" style="left: 16.6%; width: 83.3%;">全面執行與追蹤 (W2-W12)</div>
+                <div class="bar bar-kickoff" style="left: 0%; width: 16.6%;">Alignment (W0-W2)</div>
+                <div class="bar bar-execution" style="left: 16.6%; width: 83.3%;">Execution & Tracking (W2-W12)</div>
             </div>
 
             <!-- 線上主管培訓 -->
-            <div class="group-label">線上一線主管培訓<br><span style="font-size: 11px; color: #718096;">(Line Manager Onboarding)</span></div>
+            <div class="group-label">Line Manager Onboarding<br><span style="font-size: 11px; color: #718096;">(Initiated at W1)</span></div>
             <div class="track-container">
-                <!-- W1 - W3 -->
-                <div class="bar bar-kickoff" style="left: 8.3%; width: 16.6%;">對齊 (W1-W3)</div>
-                <!-- W3 - W12 執行追蹤 (W3 聚合為全面執行起點) -->
-                <div class="bar bar-execution" style="left: 25%; width: 75%;">全面執行與追蹤 (W3-W12)</div>
+                <div class="bar bar-kickoff" style="left: 8.3%; width: 16.6%;">Alignment (W1-W3)</div>
+                <div class="bar bar-execution" style="left: 25%; width: 75%;">Full Execution & Tracking (W3-W12)</div>
             </div>
 
             <!-- 薪酬與財務同步 -->
-            <div class="group-label">薪酬與財務同步<br><span style="font-size: 11px; color: #718096;">(Payroll & Finance Sync)</span></div>
+            <div class="group-label">Payroll & Finance Sync<br><span style="font-size: 11px; color: #718096;">(Initiated at W2)</span></div>
             <div class="track-container">
-                <!-- W2 - W4 -->
-                <div class="bar bar-kickoff" style="left: 16.6%; width: 16.6%;">對齊 (W2-W4)</div>
-                <!-- W3 - W12 執行追蹤 -->
-                <div class="bar bar-execution" style="left: 25%; width: 75%;">全面執行與追蹤 (W3-W12)</div>
+                <div class="bar bar-kickoff" style="left: 16.6%; width: 16.6%;">Alignment (W2-W4)</div>
+                <div class="bar bar-execution" style="left: 25%; width: 75%;">Full Execution & Tracking (W3-W12)</div>
             </div>
 
             <!-- 時間軸刻度 -->
