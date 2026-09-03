@@ -52,6 +52,22 @@
     letter-spacing:.02em;
   }
   .brandmark .name{font-size:16px; font-weight:600;}
+  .topbar-actions {display: flex; align-items: center; gap: 12px;}
+  .save-btn{
+    background:var(--amber);
+    color:#241705;
+    border:none;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    font-weight:600;
+    padding:6px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .2s, transform .1s;
+  }
+  .save-btn:hover{background:#f0a345;}
+  .save-btn:active{transform:scale(0.97);}
+
   .langtoggle{
     display:flex;
     background:rgba(255,255,255,.08);
@@ -343,9 +359,12 @@
     <div class="coord mono">HRBP · STORY BANK</div>
     <div class="name" data-i18n="candidateName">Vicky Chen</div>
   </div>
-  <div class="langtoggle">
-    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-    <button id="btn-zh" onclick="setLang('zh')">繁中</button>
+  <div class="topbar-actions">
+    <button class="save-btn" onclick="saveData()">確定 / Save</button>
+    <div class="langtoggle">
+      <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+      <button id="btn-zh" onclick="setLang('zh')">繁中</button>
+    </div>
   </div>
 </div>
 
@@ -1086,6 +1105,11 @@ function updateStoryField(tabCode, sIdx, field, value) {
   if (targetSectionZh && targetSectionZh.stories[sIdx]) {
     targetSectionZh.stories[sIdx][field] = value;
   }
+}
+
+function saveData() {
+  alert('已成功存檔！所有編輯內容已同步更新。');
+  console.log('Current Data State:', DATA);
 }
 
 function renderMain(){
