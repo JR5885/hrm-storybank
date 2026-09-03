@@ -431,9 +431,9 @@ const DATA = {
           title:"How the Process Works",
           intro:"Rolling out a strategy is not a single announcement — it is a repeatable operating rhythm.",
           steps:[
-            {h:"Alignment Phase", d:"Blue Section (Alignment / Kickoff Phase) — Action: 'Partnered with C-suite leadership to translate annual commercial strategy into team OKRs'. Design Logic: Focuses W0–W2 on aligning goals and OKRs with senior leadership rather than rushing deliverables. Highlight Detail: The commercial team completed alignment in W1—one week ahead of engineering—reflecting standard business operations where leadership must prioritize revenue targets first."},
+            {h:"Blue Section", d:"Blue Section (Alignment / Kickoff Phase) — Action: 'Partnered with C-suite leadership to translate annual commercial strategy into team OKRs'. Design Logic: Focuses W0–W2 on aligning goals and OKRs with senior leadership rather than rushing deliverables. Highlight Detail: The commercial team completed alignment in W1—one week ahead of engineering—reflecting standard business operations where leadership must prioritize revenue targets first."},
             {h:"Set department OKRs", d:"Break annual goals into measurable, owned objectives for engineering, operations, and support functions."},
-            {h:"Execution Phase", d:"Orange Section (Execution & Dashboard Tracking Phase) — Action: 'Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress'. Design Logic: Shifts the project into a sustained, stable execution phase from W2 through the end of the quarter (W12)."},
+            {h:"Orange Section", d:"Orange Section (Execution & Dashboard Tracking Phase) — Action: 'Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress'. Design Logic: Shifts the project into a sustained, stable execution phase from W2 through the end of the quarter (W12)."},
             {h:"Track it with data", d:"Build lightweight dashboards so leadership sees progress in real time rather than at quarter-end."}
           ],
           closing:"For Boskalis Taiwan, this means offshore project milestones, vessel schedules, and commercial commitments can be tracked against one shared operating rhythm — not managed in departmental silos."
@@ -734,7 +734,7 @@ const DATA = {
             asum:"OKR＋雙週衝刺＋數據模型",
             rsum:"交付速度 +25%",
             context:"在 Bitmart 快速擴張期間，技術研發里程碑與商務運營目標逐漸脫節，導致跨團隊執行進度出現落差。",
-            action:"與高層主管合作將年度商業戰略轉化為團隊 OKR，執行每日同步與雙週跨職能衝刺，並建立甘特圖同步進度。",
+            action:"Blue Section (Alignment / Kickoff Phase) Action: 'Partnered with C-suite leadership to translate annual commercial strategy into team OKRs'. Orange Section (Execution & Dashboard Tracking Phase) Action: 'Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress'.",
             result:"專案交付速度提升 25%，跨團隊執行一致性顯著改善。",
             takeaway:"可直接應用於波斯卡利斯的矩陣式組織架構，確保工程里程碑與跨部門商務目標保持一致。",
             gantt:{
@@ -770,9 +770,9 @@ const DATA = {
           title:"行動落地流程",
           intro:"策略下達不是一次性的宣布，而是一套可重複執行的營運節奏。",
           steps:[
-            {h:"藍色區段", d:"藍色區段（Alignment / Kickoff 啟動對齊期） — Action: 'Partnered with C-suite leadership to translate annual commercial strategy into team OKRs'（與高層對齊目標）。設計邏輯：專案初期（W0~W2）不急著要求團隊交出成果，而是花時間與高層及各部門拉齊目標、對焦 OKR。亮點細節（Commercial 最早完成）：圖中顯示商務組在 W1 就結束藍色對齊、進入橘色執行（比工程團隊快了一週）。這非常符合商業運作邏輯，因為商業策略與營收目標通常需由高層優先敲定，隨後才能帶動後續的工程與產品規劃。"},
+            {h:"藍色區段", d:"Blue Section (Alignment / Kickoff Phase) — Action: 'Partnered with C-suite leadership to translate annual commercial strategy into team OKRs'. Design Logic: Focuses W0–W2 on aligning goals and OKRs with senior leadership rather than rushing deliverables. Highlight Detail: The commercial team completed alignment in W1—one week ahead of engineering—reflecting standard business operations where leadership must prioritize revenue targets first."},
             {h:"設計部門級 OKR", d:"將年度目標拆解為可衡量、有明確負責人的部門目標，涵蓋工程、營運與支援職能。"},
-            {h:"橘色區段", d:"橘色區段（Execution & Dashboard Tracking 執行與追蹤期） — Action: 'Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress'（透過每日同步、雙週衝刺與甘特圖長效追蹤執行進度）。設計邏輯：當目標對齊後，從 W2 開始全面轉入長效且穩定的執行期，一路跨展至季末（W12）。"},
+            {h:"橘色區段", d:"Orange Section (Execution & Dashboard Tracking Phase) — Action: 'Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress'. Design Logic: Shifts the project into a sustained, stable execution phase from W2 through the end of the quarter (W12)."},
             {h:"用數據追蹤", d:"建立輕量化儀表板，讓管理層即時掌握進度，而非等到季末才發現落差。"}
           ],
           closing:"對波斯卡利斯台灣而言，這代表離岸專案里程碑、船期與商務承諾能被納入同一套營運節奏追蹤，而非各部門各自為政。"
@@ -1272,6 +1272,7 @@ function renderChartJS(section){
             beginAtZero: true,
             max: 100,
             ticks: { color: mute, font: { family: 'IBM Plex Mono', size: 11 }, callback: (v) => v + '%' },
+            grid: { color: line }
           },
           x: {
             ticks: { color: navy, font: { family: 'Inter', size: 12, weight: '500' } },
@@ -1293,6 +1294,7 @@ function renderChartJS(section){
         }]
       },
       options: {
+        responsive: you = true,
         responsive: true,
         maintainAspectRatio: false,
         cutout: '72%',
