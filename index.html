@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nano Technology Performance Rollout Board</title>
+    <title>全球績效與考核推廣看板 (Performance Rollout Board)</title>
     <style>
         * {
             box-sizing: border-box;
@@ -33,7 +33,6 @@
             font-size: 14px;
             color: #718096;
             margin-bottom: 24px;
-            line-height: 1.5;
         }
         .legend {
             display: flex;
@@ -56,7 +55,7 @@
 
         .timeline-grid {
             display: grid;
-            grid-template-columns: 180px 1fr;
+            grid-template-columns: 160px 1fr;
             gap: 15px 0;
             align-items: center;
         }
@@ -81,8 +80,8 @@
             border-radius: 4px;
             display: flex;
             align-items: center;
-            padding: 0 8px;
-            font-size: 11px;
+            padding: 0 10px;
+            font-size: 12px;
             color: #fff;
             font-weight: 500;
             white-space: nowrap;
@@ -111,43 +110,40 @@
 <body>
 
     <div class="container">
-        <h1>Nano Technology Performance Rollout Board</h1>
-        <p class="subtitle">
-            <strong>CONTEXT:</strong> Performance outcomes were not systematically tied to compensation or corrective action.<br>
-            <strong>ACTION:</strong> Staggered cross-functional rollout converging at W3 into a full-scale W12 execution & dashboard tracking phase, linking KPI/OKR workflows to salary reviews, promotions, and PIPs under full labor compliance.
-        </p>
+        <h1>全球績效與考核推廣看板</h1>
+        <p class="subtitle">Bitmart 與 Ourbit 生態系：跨職能團隊之 OKR、職等標準與審查機制導入時程</p>
 
         <div class="legend">
             <div class="legend-item">
                 <div class="legend-color bg-kickoff"></div>
-                <span>Alignment / Kickoff (W0-W2)</span>
+                <span>對齊與啟動 (Alignment / Kickoff)</span>
             </div>
             <div class="legend-item">
                 <div class="legend-color bg-execution"></div>
-                <span>Execution & Dashboard Tracking (W3-W12 convergence)</span>
+                <span>執行與儀表板追蹤 (Execution & Tracking)</span>
             </div>
         </div>
 
         <div class="timeline-grid">
-            <!-- HR 團隊對齊 -->
-            <div class="group-label">HR Alignment<br><span style="font-size: 11px; color: #718096;">(Initiated at W0)</span></div>
+            <!-- 研發與技術團隊 -->
+            <div class="group-label">研發與技術團隊<br><span style="font-size: 11px; color: #718096;">(Tech / Engineering)</span></div>
             <div class="track-container">
-                <div class="bar bar-kickoff" style="left: 0%; width: 16.6%;">Alignment (W0-W2)</div>
-                <div class="bar bar-execution" style="left: 16.6%; width: 83.3%;">Execution & Tracking (W2-W12)</div>
+                <div class="bar bar-kickoff" style="left: 0%; width: 16.6%;">對齊 (W0-W2)</div>
+                <div class="bar bar-execution" style="left: 16.6%; width: 66.6%;">執行與追蹤 (W2-W10)</div>
             </div>
 
-            <!-- 線上主管培訓 -->
-            <div class="group-label">Line Manager Onboarding<br><span style="font-size: 11px; color: #718096;">(Initiated at W1)</span></div>
+            <!-- 產品與設計團隊 -->
+            <div class="group-label">產品與設計團隊<br><span style="font-size: 11px; color: #718096;">(Product & Design)</span></div>
             <div class="track-container">
-                <div class="bar bar-kickoff" style="left: 8.3%; width: 16.6%;">Alignment (W1-W3)</div>
-                <div class="bar bar-execution" style="left: 25%; width: 75%;">Full Execution & Tracking (W3-W12)</div>
+                <div class="bar bar-kickoff" style="left: 8.3%; width: 16.6%;">對齊 (W1-W3)</div>
+                <div class="bar bar-execution" style="left: 25%; width: 66.6%;">執行與追蹤 (W3-W11)</div>
             </div>
 
-            <!-- 薪酬與財務同步 -->
-            <div class="group-label">Payroll & Finance Sync<br><span style="font-size: 11px; color: #718096;">(Initiated at W2)</span></div>
+            <!-- 營運與商務團隊 -->
+            <div class="group-label">營運與商務團隊<br><span style="font-size: 11px; color: #718096;">(Operations & Business)</span></div>
             <div class="track-container">
-                <div class="bar bar-kickoff" style="left: 16.6%; width: 16.6%;">Alignment (W2-W4)</div>
-                <div class="bar bar-execution" style="left: 25%; width: 75%;">Full Execution & Tracking (W3-W12)</div>
+                <div class="bar bar-kickoff" style="left: 16.6%; width: 16.6%;">對齊 (W2-W4)</div>
+                <div class="bar bar-execution" style="left: 33.3%; width: 66.6%;">執行與追蹤 (W4-W12)</div>
             </div>
 
             <!-- 時間軸刻度 -->
