@@ -359,7 +359,7 @@
     <div class="name" data-i18n="candidateName">Vicky Chen</div>
   </div>
   <div class="topbar-actions">
-    <button class="save-btn" onclick="saveData()">確定 / Save</button>
+    <button class="save-btn" onclick="saveData()">Save</button>
     <div class="langtoggle">
       <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
       <button id="btn-zh" onclick="setLang('zh')">繁中</button>
@@ -392,7 +392,7 @@ const ICON = {
   star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
 };
 
-const DATA = {
+const DEFAULT_DATA = {
   en: {
     candidateName: "Vicky Chen",
     heroEyebrow: "TARGET ROLE — HR GENERALIST, BOSKALIS OFFSHORE MARINE ENGINEERING (TAIWAN BRANCH)",
@@ -1073,6 +1073,18 @@ const DATA = {
   }
 };
 
+let DATA = JSON.parse(JSON.stringify(DEFAULT_DATA));
+
+// 載入本地儲存（若有）
+const savedData = localStorage.getItem('vicky_story_bank_data');
+if(savedData){
+  try {
+    DATA = JSON.parse(savedData);
+  } catch(e) {
+    console.error('Failed to load local storage data', e);
+  }
+}
+
 let currentLang = 'en';
 let currentTab = 'T1';
 let chartInstance = null;
@@ -1107,8 +1119,13 @@ function updateStoryField(tabCode, sIdx, field, value) {
 }
 
 function saveData() {
-  alert('已成功存檔！所有編輯內容已同步更新。');
-  console.log('Current Data State:', DATA);
+  try {
+    localStorage.setItem('vicky_story_bank_data', JSON.stringify(DATA));
+    alert('已成功存檔！重新整理或再次打開後內容將維持不變。');
+  } catch(e) {
+    alert('存檔失敗，可能是瀏覽器容量限制。');
+    console.error(e);
+  }
 }
 
 function renderMain(){
