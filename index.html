@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)file:///C:/Users/User/Downloads/nano_tech_org_chart.html -->
+<html lang="zh-Hant"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Nano Tech 奈米科技化工廠 組織與工安架構圖</title>
+<style>
+  :root{
+    --bg:#0b0f17;
+    --card:#141b28;
+    --card-border:#26314487;
+    --text:#e8edf5;
+    --sub:#8a97ab;
+    --line:#39455a;
+    --c1:#5b8def; /* 生產製造與製程 */
+    --c2:#3ec9a7; /* 品保與工安環保 */
+    --c3:#f0a63c; /* 人資與勞安紀律 */
+    --c4:#c56bef; /* 設備維護與倉管 */
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:48px 24px 80px;
+    background:radial-gradient(circle at 50% 0%, #182236 0%, var(--bg) 60%);
+    font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",sans-serif;
+    color:var(--text);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  h1{font-size:22px;font-weight:700;margin:0 0 4px;letter-spacing:.5px;}
+  .subtitle{color:var(--sub);font-size:13px;margin-bottom:40px;}
+
+  .node{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    padding:12px 20px;
+    text-align:center;
+    box-shadow:0 4px 14px rgba(0,0,0,.35);
+  }
+  .root{
+    padding:16px 32px;
+    border:1px solid #445068;
+    font-size:16px;
+    font-weight:700;
+  }
+  .root .count{color:var(--sub);font-weight:400;font-size:12px;margin-top:2px;}
+
+  .connector{width:2px;height:32px;background:var(--line);}
+
+  .dept-row{
+    display:flex;
+    justify-content:center;
+    gap:28px;
+    position:relative;
+    margin-top:0;
+  }
+  .dept-row::before{
+    content:"";
+    position:absolute;
+    top:-32px;
+    left:12.5%;
+    right:12.5%;
+    height:2px;
+    background:var(--line);
+  }
+  .dept-col{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:280px;
+  }
+  .dept-col .connector{height:32px;}
+
+  .dept-node{width:100%;border-top:3px solid var(--accent);}
+  .dept-node .name{font-size:15px;font-weight:700;}
+  .dept-node .count{font-size:12px;color:var(--sub);margin-top:4px;}
+
+  .pods{
+    margin-top:24px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    width:100%;
+    position:relative;
+    padding-top:24px;
+  }
+  .pods::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:50%;
+    width:2px;
+    height:24px;
+    background:var(--line);
+  }
+  .pod{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-left:3px solid var(--accent);
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:left;
+  }
+  .pod::before{
+    content:"";
+    position:absolute;
+    top:-14px;
+    left:50%;
+    width:2px;
+    height:14px;
+    background:var(--line);
+  }
+  .pod:first-child::before{display:none;}
+  .pod-name{font-size:13.5px;font-weight:700;}
+  .pod-count{font-size:11.5px;color:var(--accent);font-weight:600;margin-left:6px;}
+  .pod-goal{font-size:12px;color:var(--sub);margin-top:6px;line-height:1.6;}
+  .badge{
+    display:inline-block;
+    font-size:10px;
+    background:var(--accent);
+    color:#0b0f17;
+    padding:1px 6px;
+    border-radius:4px;
+    margin-left:6px;
+    font-weight:700;
+    vertical-align:middle;
+  }
+
+  .c1{--accent:var(--c1);}
+  .c2{--accent:var(--c2);}
+  .c3{--accent:var(--c3);}
+  .c4{--accent:var(--c4);}
+
+  .tabs{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;justify-content:center;}
+  .tab-btn{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    color:var(--sub);
+    font-size:13px;
+    font-weight:600;
+    padding:9px 22px;
+    border-radius:8px;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .tab-btn.active{color:var(--text);border-color:#5b8def;background:#182236;}
+  .tab-panel{display:none;width:100%;max-width:900px;}
+  .tab-panel.active{display:flex;flex-direction:column;align-items:center;}
+
+  .tree{
+    width:100%;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    padding:28px 32px;
+    font-size:13px;
+    line-height:2;
+  }
+  .tree .l1{font-weight:700;font-size:14.5px;}
+  .tree .l1 .meta{font-weight:400;color:var(--sub);font-size:12px;}
+  .tree ul{list-style:none;margin:4px 0 14px;padding-left:22px;}
+  .tree .dept-line{font-weight:700;margin-top:14px;}
+  .tree .dept-line .cnt{font-weight:400;color:var(--sub);}
+  .tree .pod-line{color:var(--text);}
+  .tree .pod-line .cnt{color:var(--accent);font-weight:600;}
+  .tree .goal{display:block;color:var(--sub);font-size:12px;line-height:1.7;padding:2px 0 6px 18px;}
+  .tree .badge{
+    display:inline-block;font-size:10px;background:var(--accent);color:#0b0f17;
+    padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:700;vertical-align:middle;
+  }
+
+  .matrix-wrap{width:100%;max-width:1180px;}
+  .matrix-title{font-size:16px;font-weight:700;margin-bottom:6px;}
+  .matrix-desc{font-size:12.5px;color:var(--sub);line-height:1.8;margin-bottom:22px;}
+  .matrix-table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+    overflow:hidden;
+    font-size:12.5px;
+  }
+  .matrix-table th,.matrix-table td{
+    padding:14px 16px;
+    text-align:left;
+    vertical-align:top;
+    border-bottom:1px solid var(--card-border);
+    border-right:1px solid var(--card-border);
+  }
+  .matrix-table th:last-child,.matrix-table td:last-child{border-right:none;}
+  .matrix-table tr:last-child td{border-bottom:none;}
+  .matrix-table thead th{
+    background:#101724;
+    font-size:12.5px;
+    font-weight:700;
+    line-height:1.5;
+  }
+  .matrix-table thead th .pdf-tag{
+    display:inline-block;font-size:9.5px;color:var(--sub);
+    border:1px solid var(--card-border);border-radius:4px;
+    padding:0 5px;margin-left:6px;vertical-align:middle;font-weight:600;
+  }
+  .matrix-table .row-label{
+    font-weight:700;
+    color:var(--sub);
+    font-size:12px;
+    white-space:nowrap;
+    background:#101724;
+  }
+  .matrix-table td ul{margin:0;padding-left:16px;}
+  .matrix-table td li{margin-bottom:6px;line-height:1.6;}
+  .matrix-table td li:last-child{margin-bottom:0;}
+  .matrix-table .o-cell{font-weight:600;line-height:1.6;}
+  .th-front{border-top:3px solid var(--c1);}
+  .th-mid{border-top:3px solid var(--c2);}
+  .th-back{border-top:3px solid var(--c4);}
+  .th-hrbp{border-top:3px solid var(--c3);}
+
+  .th-bitmart{border-top:3px solid var(--c1);}
+  .th-nano{border-top:3px solid var(--c2);}
+  .compare-table .row-label{width:14%;}
+  .compare-table td{line-height:1.7;}
+
+  .score-cell{display:flex;align-items:center;gap:8px;white-space:nowrap;}
+  .score-num{font-weight:700;font-size:13px;width:26px;}
+  .score-bar-track{flex:1;height:6px;border-radius:3px;background:#232e42;min-width:60px;}
+  .score-bar-fill{height:100%;border-radius:3px;}
+  .health-table tfoot td{
+    background:#101724;font-weight:700;font-size:14px;border-bottom:none;
+  }
+  .health-table tfoot .total-score{color:var(--c2);}
+
+  .legend-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;
+  }
+  .legend-card{
+    background:var(--card);border:1px solid var(--card-border);border-radius:10px;
+    padding:16px 18px;border-left:4px solid var(--dot);
+  }
+  .legend-card .head{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13.5px;margin-bottom:8px;}
+  .legend-card .dot{width:10px;height:10px;border-radius:50%;background:var(--dot);flex-shrink:0;}
+  .legend-card .body{font-size:12px;color:var(--sub);line-height:1.7;}
+  .legend-card.green{--dot:#3ec9a7;}
+  .legend-card.yellow{--dot:#f0c93c;}
+  .legend-card.red{--dot:#ef5b5b;}
+  .legend-card.current{box-shadow:0 0 0 1px var(--dot);}
+  .current-tag{
+    display:inline-block;font-size:9.5px;background:var(--dot);color:#0b0f17;
+    padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:700;vertical-align:middle;
+  }
+
+  .section-block{width:100%;max-width:1180px;margin-bottom:44px;}
+  .section-block:last-child{margin-bottom:0;}
+  .section-h{font-size:16px;font-weight:700;margin-bottom:6px;}
+  .section-sub{font-size:12.5px;color:var(--sub);line-height:1.8;margin-bottom:18px;}
+  .subhead{font-size:13.5px;font-weight:700;margin:22px 0 10px;color:var(--text);}
+
+  .flow-row{
+    display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+    gap:0;background:var(--card);border:1px solid var(--card-border);
+    border-radius:10px;padding:18px 16px;margin-bottom:8px;
+  }
+  .flow-step{
+    font-size:12.5px;font-weight:700;text-align:center;padding:10px 16px;
+    border-radius:8px;background:#101724;border:1px solid var(--card-border);
+    min-width:150px;
+  }
+  .flow-arrow{color:var(--sub);font-size:16px;padding:0 10px;}
+
+  .rating-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+  .rating-pill{
+    display:flex;align-items:center;gap:8px;background:var(--card);
+    border:1px solid var(--card-border);border-radius:8px;padding:10px 14px;flex:1;min-width:200px;
+  }
+  .rating-pill .letter{
+    width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:12.5px;color:#0b0f17;flex-shrink:0;
+  }
+  .rating-pill .txt{font-size:12px;color:var(--sub);line-height:1.6;}
+  .rating-pill .txt b{color:var(--text);}
+  .letter.s{background:#f0c93c;}
+  .letter.ab{background:#3ec9a7;}
+  .letter.cd{background:#ef5b5b;}
+
+  .weight-row{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;}
+  .weight-card{
+    flex:1;min-width:260px;background:var(--card);border:1px solid var(--card-border);
+    border-radius:10px;padding:14px 16px;
+  }
+  .weight-card .wtitle{font-size:13px;font-weight:700;margin-bottom:6px;}
+  .weight-card .wtitle .pct{color:var(--c1);margin-left:4px;}
+  .weight-card ul{margin:8px 0 0;padding-left:18px;font-size:12px;color:var(--sub);line-height:1.7;}
+
+  .sop-steps{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
+  .sop-step{
+    flex:1;min-width:260px;background:var(--card);border:1px solid var(--card-border);
+    border-radius:10px;padding:16px 18px;position:relative;
+  }
+  .sop-step .num{
+    display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
+    border-radius:50%;background:#5b8def;color:#0b0f17;font-size:11px;font-weight:700;margin-right:8px;
+  }
+  .sop-step .stitle{font-size:13px;font-weight:700;display:inline;}
+  .sop-step .sbody{font-size:12px;color:var(--sub);line-height:1.75;margin-top:8px;}
+</style>
+</head>
+<body>
+
+  <h1>Nano Tech 奈米科技化工廠 組織與工安架構圖</h1>
+  <div class="subtitle">300 人廠區編組 ・ 強力落實化工廠工安、證照回訓與標準作業流程</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('chart', this)">🗂 組織樹狀圖</button>
+    <button class="tab-btn" onclick="showTab('list', this)">📋 條列大綱</button>
+    <button class="tab-btn" onclick="showTab('matrix', this)">🎯 目標管理矩陣 (BitMart)</button>
+    <button class="tab-btn" onclick="showTab('matrix2', this)">⚡ 廠區工安矩陣 (Nano Tech)</button>
+    <button class="tab-btn" onclick="showTab('compare', this)">🆚 管理模式差異對比</button>
+    <button class="tab-btn" onclick="showTab('health', this)">📊 廠區工安與健康度評分</button>
+    <button class="tab-btn" onclick="showTab('promo', this)">🚀 考核、培訓與工安懲戒機制</button>
+  </div>
+
+  <div id="chart" class="tab-panel active">
+
+  <div class="node root">
+    廠長 / 總廠務長 (Plant Director)
+    <div class="count">全廠 ~300 人 ・ 重視工安意識、師徒培訓與不定期稽核</div>
+  </div>
+  <div class="connector"></div>
+
+  <div class="dept-row">
+
+    <div class="dept-col c1">
+      <div class="node dept-node">
+        <div class="name">1. 生產製造與製程</div>
+        <div class="count">65 人</div>
+      </div>
+      <div class="pods">
+        <div class="pod">
+          <span class="pod-name">反應與合成組</span><span class="pod-count">25人</span>
+          <div class="pod-goal">在十座上重視工安意識，確實配戴正確 PPE，確保化學反應操作安全與零洩漏。</div>
+        </div>
+        <div class="pod">
+          <span class="pod-name">精餾與純化組</span><span class="pod-count">20人</span>
+          <div class="pod-goal">嚴格執行標準操作安全，落實設備巡檢與異常通報。</div>
+        </div>
+        <div class="pod">
+          <span class="pod-name">包裝與充填組</span><span class="pod-count">20人</span>
+          <div class="pod-goal">落實危險品搬運與防護規範，確保作業現場安全無虞。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dept-col c2">
+      <div class="node dept-node">
+        <div class="name">2. 品保與工安環保</div>
+        <div class="count">75 人</div>
+      </div>
+      <div class="pods">
+        <div class="pod">
+          <span class="pod-name">工安環保組</span><span class="pod-count">35人</span>
+          <div class="pod-goal">定期辦理場內演練、安全海報宣導與公安意識推廣。</div>
+        </div>
+        <div class="pod">
+          <span class="pod-name">證照回訓審核組</span><span class="pod-count">25人</span><span class="badge">工安重點</span>
+          <div class="pod-goal">依法要求員工進行證照回訓與專業資格審查，確保全廠合法合規。</div>
+        </div>
+        <div class="pod">
+          <span class="pod-name">品質檢驗組</span><span class="pod-count">15人</span>
+          <div class="pod-goal">把關原物料與化學品品質，維護實驗室安全環境。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dept-col c3">
+      <div class="node dept-node">
+        <div class="name">3. 人資與勞安紀律</div>
+        <div class="count">110 人</div>
+      </div>
+      <div class="pods">
+        <div class="pod">
+          <span class="pod-name">新人培訓與導師組</span><span class="pod-count">30人</span><span class="badge">手把手培訓</span>
+          <div class="pod-goal">新人經由資深導師 3 個月手把手培訓，並在十座上嚴格建立工安意識。</div>
+        </div>
+        <div class="pod">
+          <span class="pod-name">公安激勵與福委組</span><span class="pod-count">35人</span>
+          <div class="pod-goal">不定期抽查廠區作業，對公安表現良好者給予公開獎勵。</div>
+        </div>
+        <div class="pod">
+          <span class="pod-name">勞安紀律與考核組</span><span class="pod-count">25人</span>
+          <div class="pod-goal">將工安表現納入適用期考核；違反公安者依情節處罰，情節重大予以解約。</div>
+        </div>
+        <div class="pod">
+          <span class="pod-name">行政與後勤支援組</span><span class="pod-count">20人</span>
+          <div class="pod-goal">支援全廠後勤需求，確保防護具與安全物資供應充足。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dept-col c4">
+      <div class="node dept-node">
+        <div class="name">4. 設備維護與倉管</div>
+        <div class="count">50 人</div>
+      </div>
+      <div class="pods">
+        <div class="pod">
+          <span class="pod-name">管線與動力維護組</span><span class="pod-count">20人</span>
+          <div class="pod-goal">落實高風險動火與局限空間作業之安全防護與查核。</div>
+        </div>
+        <div class="pod">
+          <span class="pod-name">儀電與自動化組</span><span class="pod-count">18人</span>
+          <div class="pod-goal">維護廠內緊急安全連鎖與自動煞車系統，確保操作安全。</div>
+        </div>
+        <div class="pod">
+          <span class="pod-name">危險品倉管組</span><span class="pod-count">12人</span>
+          <div class="pod-goal">嚴格管理化學品倉儲安全，落實防護標示與安全規範。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+
+  <div id="list" class="tab-panel">
+    <div class="tree">
+      <div class="l1">[ 廠長 / 總廠務長 ]</div>
+      <ul>
+        <li>廠區總人數：<span class="meta">~300 人</span></li>
+        <li>核心安全政策：<span class="meta">Nano Tech 奈米科技身為化工廠，高度重視工安。HR 要求證照回訓、定期場內演練、海報宣導公安意識；不定期抽查並獎勵公安良好行為；新人經由導師 3 個月手把手培訓並在十座上重視工安意識、配戴正確 PPE、重視操作安全並納入適用期考核；違反公安依情節處罰，情節重大予以解約。</span></li>
+      </ul>
+
+      <div class="l1" style="margin-top:18px;">[ 四大廠務部門與所屬班組 ]</div>
+
+      <div class="dept-line c1" style="color:var(--c1);">1. 生產製造與製程部門 — <span class="cnt">共 65 人</span></div>
+      <ul style="--accent:var(--c1);">
+        <li class="pod-line">├── 反應與合成組 <span class="cnt">| 25 人</span>
+          <span class="goal">目標：在十座上重視工安意識，確實配戴正確 PPE，確保化學反應操作安全與零洩漏。</span>
+        </li>
+        <li class="pod-line">├── 精餾與純化組 <span class="cnt">| 20 人</span>
+          <span class="goal">目標：嚴格執行標準操作安全，落實設備巡檢與異常通報。</span>
+        </li>
+        <li class="pod-line">└── 包裝與充填組 <span class="cnt">| 20 人</span>
+          <span class="goal">目標：落實危險品搬運與防護規範，確保作業現場安全無虞。</span>
+        </li>
+      </ul>
+
+      <div class="dept-line" style="color:var(--c2);">2. 品保與工安環保部門 — <span class="cnt">共 75 人</span></div>
+      <ul style="--accent:var(--c2);">
+        <li class="pod-line">├── 工安環保組 <span class="cnt">| 35 人</span>
+          <span class="goal">目標：定期辦理場內演練、安全海報宣導與公安意識推廣。</span>
+        </li>
+        <li class="pod-line">├── 證照回訓審核組 <span class="cnt">| 25 人</span><span class="badge" style="background:var(--c2);color:#0b0f17;">工安重點</span>
+          <span class="goal">目標：依法要求員工進行證照回訓與專業資格審查，確保全廠合法合規。</span>
+        </li>
+        <li class="pod-line">└── 品質檢驗組 <span class="cnt">| 15 人</span>
+          <span class="goal">目標：把關原物料與化學品品質，維護實驗室安全環境。</span>
+        </li>
+      </ul>
+
+      <div class="dept-line" style="color:var(--c3);">3. 人資與勞安紀律部門 — <span class="cnt">共 110 人</span></div>
+      <ul style="--accent:var(--c3);">
+        <li class="pod-line">├── 新人培訓與導師組 <span class="cnt">| 30 人</span>
+          <span class="goal">目標：新人經由資深導師 3 個月手把手培訓，並在十座上嚴格建立工安意識。</span>
+        </li>
+        <li class="pod-line">├── 公安激勵與福委組 <span class="cnt">| 35 人</span>
+          <span class="goal">目標：不定期抽查廠區作業，對公安表現良好者給予公開獎勵。</span>
+        </li>
+        <li class="pod-line">├── 勞安紀律與考核組 <span class="cnt">| 25 人</span>
+          <span class="goal">目標：將工安表現納入適用期考核；違反公安者依情節處罰，情節重大予以解約。</span>
+        </li>
+        <li class="pod-line">└── 行政與後勤支援組 <span class="cnt">| 20 人</span>
+          <span class="goal">目標：支援全廠後勤需求，確保防護具與安全物資供應充足。</span>
+        </li>
+      </ul>
+
+      <div class="dept-line" style="color:var(--c4);">4. 設備維護與倉管部門 — <span class="cnt">共 50 人</span></div>
+      <ul style="--accent:var(--c4);">
+        <li class="pod-line">├── 管線與動力維護組 <span class="cnt">| 20 人</span>
+          <span class="goal">目標：落實高風險動火與局限空間作業之安全防護與查核。</span>
+        </li>
+        <li class="pod-line">├── 儀電與自動化組 <span class="cnt">| 18 人</span>
+          <span class="goal">目標：維護廠內緊急安全連鎖與自動煞車系統，確保操作安全。</span>
+        </li>
+        <li class="pod-line">└── 危險品倉管組 <span class="cnt">| 12 人</span>
+          <span class="goal">目標：嚴格管理化學品倉儲安全，落實防護標示與安全規範。</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="matrix" class="tab-panel">
+    <div class="matrix-wrap">
+      <div class="matrix-title">一、廠區目標管理與 HR 協同對齊矩陣</div>
+      <div class="matrix-desc">透過各部門目標對齊，確保化工廠產能、設備維護與工安法規全面落實。</div>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th style="width:11%;">組織層級</th>
+            <th class="th-front" style="width:22.25%;">生產與製程目標<span class="pdf-tag">PDF</span></th>
+            <th class="th-mid" style="width:22.25%;">品保與工安環保目標<span class="pdf-tag">PDF</span></th>
+            <th class="th-back" style="width:22.25%;">設備與倉管目標<span class="pdf-tag">PDF</span></th>
+            <th class="th-hrbp" style="width:22.25%;">人資與工安紀律目標<span class="pdf-tag">PDF</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">目標 (O)</td>
+            <td class="o-cell">O1：提升化工產能與操作安全</td>
+            <td class="o-cell">O1：落實證照回訓與場內演練</td>
+            <td class="o-cell">O1：確保廠區設備高妥善與安全防護</td>
+            <td class="o-cell">O1：落實新人 3 個月導師培訓與適用期工安考核</td>
+          </tr>
+          <tr>
+            <td class="row-label">關鍵結果<br>(KRs)</td>
+            <td>
+              <ul>
+                <li>KR1：產能達標率提升 15%</li>
+                <li>KR2：十座上重視工安意識，PPE 正確配戴率 100%</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：專業證照回訓完成率 100%</li>
+                <li>KR2：定期場內演練與安全海報宣導全覆蓋</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：設備定期檢修率 100%</li>
+                <li>KR2：高風險動火與局限空間 0 違規</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：新人 3 個月手把手培訓結業率 100%</li>
+                <li>KR2：不定期抽查與公安良好行為獎勵落實</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="row-label">目標 (O)</td>
+            <td class="o-cell">O2：嚴格遵守標準作業安全規範</td>
+            <td class="o-cell">O2：強化公安意識宣導與稽核</td>
+            <td class="o-cell">O2：落實危險品倉儲安全管理</td>
+            <td class="o-cell">O2：執行公安違規懲處與重大解約機制</td>
+          </tr>
+          <tr>
+            <td class="row-label">關鍵結果<br>(KRs)</td>
+            <td>
+              <ul>
+                <li>KR1：SOP 執行落實率 100%</li>
+                <li>KR2：製程零洩漏、零工安事故</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：法規與環保稽查 100% 合格</li>
+                <li>KR2：公安宣導涵蓋率 100%</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：危險品庫存盤點誤差率 0%</li>
+                <li>KR2：安全連鎖系統測試正常</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：違反公安者依情節迅速處分</li>
+                <li>KR2：情節重大者果斷予以解約</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="matrix2" class="tab-panel">
+    <div class="matrix-wrap">
+      <div class="matrix-title">二、Nano Tech 奈米科技化工廠專屬工安矩陣</div>
+      <div class="matrix-desc">具體呈現化工廠對於工安意識、證照回訓、導師培訓與違規解約機制的落實方式。</div>
+
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th style="width:11%;">組織層級</th>
+            <th class="th-front" style="width:22.25%;">生產製造組目標<span class="pdf-tag">PDF</span></th>
+            <th class="th-mid" style="width:22.25%;">工安環保組目標<span class="pdf-tag">PDF</span></th>
+            <th class="th-back" style="width:22.25%;">設備維護與倉管目標<span class="pdf-tag">PDF</span></th>
+            <th class="th-hrbp" style="width:22.25%;">人資與導師培訓目標<span class="pdf-tag">PDF</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">目標 (O)</td>
+            <td class="o-cell">O1：十座上重視工安與正確配戴 PPE</td>
+            <td class="o-cell">O1：落實證照回訓、場內演練與海報宣導</td>
+            <td class="o-cell">O1：加強化工設備與管線安全防護</td>
+            <td class="o-cell">O1：落實新人 3 個月手把手培訓與適用期考核</td>
+          </tr>
+          <tr>
+            <td class="row-label">關鍵結果<br>(KRs)</td>
+            <td>
+              <ul>
+                <li>KR1：十座工安操作合格率 100%</li>
+                <li>KR2：PPE 正確配戴率 100%</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：每季定期場內演練 2 次以上</li>
+                <li>KR2：專業證照回訓率 100%</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：設備安全巡檢 100% 確實</li>
+                <li>KR2：化學品管線零漏點</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：3 個月導師培訓考核追蹤率 100%</li>
+                <li>KR2：適用期工安表現嚴格把關</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="row-label">目標 (O)</td>
+            <td class="o-cell">O2：落實操作安全與零災害</td>
+            <td class="o-cell">O2：執行不定期公安抽查與行為獎勵</td>
+            <td class="o-cell">O2：確保危險品倉儲環境安全</td>
+            <td class="o-cell">O2：執行公安違規處罰與重大解約</td>
+          </tr>
+          <tr>
+            <td class="row-label">關鍵結果<br>(KRs)</td>
+            <td>
+              <ul>
+                <li>KR1：產線操作零違規</li>
+                <li>KR2：全年累計零工安事故</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：不定期公安抽查每月 4 次以上</li>
+                <li>KR2：落實公安良好行為公開獎勵</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：危險品倉儲安全檢查 100% 合格</li>
+                <li>KR2：消防防護設施完好率 100%</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>KR1：公安違規懲處執行率 100%</li>
+                <li>KR2：情節重大者依法與依規予以解約</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="compare" class="tab-panel">
+    <div class="matrix-wrap">
+      <div class="matrix-title">管理模式核心特色對比</div>
+
+      <table class="matrix-table compare-table">
+        <thead>
+          <tr>
+            <th style="width:14%;">對比維度</th>
+            <th class="th-bitmart" style="width:43%;">一般製造廠管理模式</th>
+            <th class="th-nano" style="width:43%;">Nano Tech 奈米科技化工廠管理模式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">工安核心要求</td>
+            <td>一般廠區安全規範與基本紀律。</td>
+            <td><b>高度重視化工安全：</b>強調十座上重視工安意識、正確配戴 PPE 與操作安全。</td>
+          </tr>
+          <tr>
+            <td class="row-label">新人培訓機制</td>
+            <td>標準入職培訓與一般師徒帶教。</td>
+            <td><b>3 個月手把手培訓：</b>由資深導師帶領新人，並在十座上嚴格建立工安意識。</td>
+          </tr>
+          <tr>
+            <td class="row-label">證照與演練</td>
+            <td>年度例行性辦理。</td>
+            <td><b>嚴格回訓與演練：</b>HR 要求專業證照回訓、定期場內演練及海報宣導公安意識。</td>
+          </tr>
+          <tr>
+            <td class="row-label">稽核與獎懲</td>
+            <td>主管定期巡視與一般考核。</td>
+            <td><b>不定期抽查與獎懲：</b>不定期抽查並獎勵公安良好行為；違反公安者處罰，情節重大予以解約。</td>
+          </tr>
+          <tr>
+            <td class="row-label">適用期考核</td>
+            <td>一般工作技能與績效評估。</td>
+            <td><b>納入工安考核：</b>適用期考核嚴格將工安表現、PPE 配戴與十座規範納入關鍵指標。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="health" class="tab-panel">
+    <div class="matrix-wrap">
+      <div class="matrix-title">廠區工安與健康度評分範例</div>
+      <div class="matrix-desc">假設某 50 人的化工生產車間，當季各工安維度得分如下：</div>
+
+      <table class="matrix-table health-table">
+        <thead>
+          <tr>
+            <th style="width:14%;">維度</th>
+            <th style="width:30%;">衡量指標</th>
+            <th style="width:16%;">實際表現得分 (100分制)</th>
+            <th style="width:10%;">權重</th>
+            <th style="width:14%;">加權分數</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">十座與 PPE</td>
+            <td>十座工安落實、PPE 正確配戴率 100%</td>
+            <td>
+              <div class="score-cell">
+                <span class="score-num">95</span>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:95%;background:#3ec9a7;"></div></div>
+              </div>
+            </td>
+            <td>35%</td>
+            <td>33.25</td>
+          </tr>
+          <tr>
+            <td class="row-label">證照回訓與演練</td>
+            <td>證照回訓率 100%、場內演練與海報宣導確實</td>
+            <td>
+              <div class="score-cell">
+                <span class="score-num">90</span>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:90%;background:#3ec9a7;"></div></div>
+              </div>
+            </td>
+            <td>25%</td>
+            <td>22.5</td>
+          </tr>
+          <tr>
+            <td class="row-label">新人導師培訓</td>
+            <td>3 個月手把手培訓、適用期工安考核嚴格</td>
+            <td>
+              <div class="score-cell">
+                <span class="score-num">88</span>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:88%;background:#3ec9a7;"></div></div>
+              </div>
+            </td>
+            <td>20%</td>
+            <td>17.6</td>
+          </tr>
+          <tr>
+            <td class="row-label">不定期抽查與獎懲</td>
+            <td>不定期抽查落實、公安良好行為獎勵與違規懲處</td>
+            <td>
+              <div class="score-cell">
+                <span class="score-num">90</span>
+                <div class="score-bar-track"><div class="score-bar-fill" style="width:90%;background:#3ec9a7;"></div></div>
+              </div>
+            </td>
+            <td>20%</td>
+            <td>18.0</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">總分：廠區工安健康度得分</td>
+            <td class="total-score">91.35 分</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="matrix-title" style="font-size:14px;margin-top:30px;">健康等級劃分說明</div>
+
+      <div class="legend-grid">
+        <div class="legend-card green current">
+          <div class="head"><span class="dot"></span>85 – 100 分（綠燈 - 安全高效）<span class="current-tag">當前狀態</span></div>
+          <div class="body">工安落實良好，持續維持公安良好行為獎勵與導師培訓制度。</div>
+        </div>
+        <div class="legend-card yellow">
+          <div class="head"><span class="dot"></span>70 – 84 分（黃燈 - 預警狀態）</div>
+          <div class="body">部分環節需加強海報宣導與不定期抽查頻率。</div>
+        </div>
+        <div class="legend-card red">
+          <div class="head"><span class="dot"></span>&lt; 70 分（紅燈 - 高風險）</div>
+          <div class="body">廠區工安出現重大隱患，需立即停工檢討、加強證照回訓與紀律處分。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="promo" class="tab-panel">
+
+    <div class="section-block">
+      <div class="section-h">新人培訓、工安意識、適用期考核與懲戒解約機制</div>
+      <div class="section-sub">詳細說明 Nano Tech 奈米科技化工廠對於新進人員培訓、證照回訓、工安演練及違規處置辦法。</div>
+
+      <div class="sop-steps">
+        <div class="sop-step">
+          <span class="num">1</span><span class="stitle">3 個月手把手導師培訓</span>
+          <div class="sbody">新進員工入職後，由資深導師進行 3 個月手把手培訓。重點傳授十座上重視工安意識、正確配戴 PPE 與各項化工操作安全規範。</div>
+        </div>
+        <div class="sop-step">
+          <span class="num">2</span><span class="stitle">適用期考核與工安納入</span>
+          <div class="sbody">工安表現、PPE 配戴與十座操作規範直接納入新人適用期考核。表現未達標準者不予錄用。</div>
+        </div>
+        <div class="sop-step">
+          <span class="num">3</span><span class="stitle">證照回訓、演練與海報宣導</span>
+          <div class="sbody">HR 與工安部門定期要求員工進行證照回訓、舉辦定期場內演練及安全海報宣導，全面提升公安意識。</div>
+        </div>
+        <div class="sop-step">
+          <span class="num">4</span><span class="stitle">不定期抽查、獎勵與重大解約</span>
+          <div class="sbody">廠區實施不定期公安抽查，對公安良好行為給予獎勵；若違反公安規定則依情節處罰，情節重大者予以解約。</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function showTab(id, btn){
+      document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+      document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+
+</body></html>
