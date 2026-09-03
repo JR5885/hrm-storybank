@@ -787,7 +787,7 @@ const DATA = {
           }
         ],
         narrative:{
-          title:"行動落地流程",
+          title:"How the Process Works",
           intro:"策略下達不是一次性的宣布，而是一套可重複執行的營運節奏。",
           steps:[
             {h:"藍色區段", d:"1. Blue Section (Alignment / Kickoff Phase)\nAction: \"Partnered with C-suite leadership to translate annual commercial strategy into team OKRs.\"\nDesign Logic: Focuses W0–W2 on aligning goals and OKRs with senior leadership rather than rushing deliverables.\nHighlight Detail: The commercial team completed alignment in W1—one week ahead of engineering—reflecting standard business operations where leadership must prioritize revenue targets first."},
@@ -1051,7 +1051,7 @@ const DATA = {
         }
       }
     ],
-    labels:{c:"CONTEXT",a:"JSON",r:"RESULT",tk:"TRANSFERABLE VALUE",align:"JD ALIGNMENT",fullDetail:"Full story detail",stepDetail:"Full process notes",alignPhase:"Alignment / Kickoff",execPhase:"Execution & Dashboard Tracking",weekAxis:"Quarter Timeline (Weeks)"}
+    labels:{c:"CONTEXT",a:"ACTION",r:"RESULT",tk:"TRANSFERABLE VALUE",align:"JD ALIGNMENT",fullDetail:"Full story detail",stepDetail:"Full process notes",alignPhase:"Alignment / Kickoff",execPhase:"Execution & Dashboard Tracking",weekAxis:"Quarter Timeline (Weeks)"}
   }
 };
 
@@ -1282,7 +1282,7 @@ function renderChartJS(section){
   const canvas = document.getElementById('tabChart');
   if(!canvas) return;
   const ctx = canvas.getContext('2d');
-  const navy = '#0B2A3D', steel = '#1B4965', amber = '#E8963A', line = '--D6DCDE', mute = '#5B6E76';
+  const navy = '#0B2A3D', steel = '#1B4965', amber = '#E8963A', line = '#D6DCDE', mute = '#5B6E76';
 
   if(section.chart.type === 'bar'){
     const m = section.chart.metrics;
@@ -1312,7 +1312,7 @@ function renderChartJS(section){
             beginAtZero: true,
             max: 100,
             ticks: { color: mute, font: { family: 'IBM Plex Mono', size: 11 }, callback: (v) => v + '%' },
-            grid: { color: '#D6DCDE' }
+            grid: { color: line }
           },
           x: {
             ticks: { color: navy, font: { family: 'Inter', size: 12, weight: '500' } },
@@ -1321,7 +1321,7 @@ function renderChartJS(section){
         }
       }
     });
-  } else.chart && section.chart.type === 'doughnut'; {
+  } else if(section.chart.type === 'doughnut'){
     const v = section.chart.metric.value;
     chartInstance = new Chart(ctx, {
       type: 'doughnut',
@@ -1329,7 +1329,7 @@ function renderChartJS(section){
         labels: [section.chart.metric.label, ''],
         datasets: [{
           data: [v, 100 - v],
-          backgroundColor: [amber, '#D6DCDE'],
+          backgroundColor: [amber, line],
           borderWidth: 0
         }]
       },
