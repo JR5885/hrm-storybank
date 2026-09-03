@@ -52,21 +52,20 @@
     letter-spacing:.02em;
   }
   .brandmark .name{font-size:16px; font-weight:600;}
-  .topbar-actions {display: flex; align-items: center; gap: 12px;}
+  
+  .topbar-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
   .save-btn{
-    background:var(--amber);
-    color:#241705;
-    border:none;
+    border:none; background:var(--amber); color:#241705;
     font-family:'IBM Plex Mono',monospace;
-    font-size:12px;
-    font-weight:600;
-    padding:6px 16px;
-    border-radius:999px;
-    cursor:pointer;
-    transition:background .2s, transform .1s;
+    font-size:12px; font-weight:600;
+    padding:6px 16px; border-radius:999px; cursor:pointer;
+    transition:background .2s;
   }
   .save-btn:hover{background:#f0a345;}
-  .save-btn:active{transform:scale(0.97);}
 
   .langtoggle{
     display:flex;
