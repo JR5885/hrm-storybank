@@ -474,9 +474,9 @@ const DATA = {
           {
             theme:"Linking Ratings to Merit, PIPs, and Compliance",
             align:"JD 3 — Use evaluation results for merit increases, promotions, retention, or separation",
-            csum:"Ratings not tied to pay or action",
-            asum:"Staggered rollout (W0–W3) & KPI/OKR workflows",
-            rsum:"95%+ compliance, 0 disputes, +15% engagement",
+            csum:"At Nano Technology, performance outcomes were not systematically tied to compensation or corrective action.",
+            asum:"Deployed a staggered cross-functional rollout starting with HR alignment (W0), Line Manager onboarding (W1), and Payroll & Finance synchronization (W2), converging at W3 into a full-scale execution and dashboard tracking phase through W12. This standardized KPI/OKR workflows, directly linking results to salary reviews, promotions, and PIPs while ensuring full labor compliance. Integration of the Blue Section (Alignment / Kickoff): Clearly highlights the sequential alignment and kickoff cadence initiated by HR in W0, followed by Line Managers in W1, and Payroll & Finance in W2.\nIntegration of the Orange Section (Execution & Dashboard Tracking): Emphasizes W3 as the point of full convergence, launching a W12-long phase of comprehensive execution and dashboard tracking, which highlights the project's complete lifecycle from initial setup to long-term monitoring and land-and-expand execution.",
+            rsum:"Sustained 95%+ labor compliance with 0 labor disputes, alongside a 15% rise in engagement and 20% rise in productivity.",
             context:"At Nano Technology, performance outcomes were not systematically tied to compensation or corrective action.",
             action:"Deployed a staggered cross-functional rollout starting with HR alignment (W0), Line Manager onboarding (W1), and Payroll & Finance synchronization (W2), converging at W3 into a full-scale execution and dashboard tracking phase through W12. This standardized KPI/OKR workflows, directly linking results to salary reviews, promotions, and PIPs while ensuring full labor compliance. Integration of the Blue Section (Alignment / Kickoff): Clearly highlights the sequential alignment and kickoff cadence initiated by HR in W0, followed by Line Managers in W1, and Payroll & Finance in W2.\nIntegration of the Orange Section (Execution & Dashboard Tracking): Emphasizes W3 as the point of full convergence, launching a W12-long phase of comprehensive execution and dashboard tracking, which highlights the project's complete lifecycle from initial setup to long-term monitoring and land-and-expand execution.",
             result:"Sustained 95%+ labor compliance with 0 labor disputes, alongside a 15% rise in engagement and 20% rise in productivity.",
@@ -813,8 +813,347 @@ const DATA = {
           {
             theme:"將考核結果連動調薪、PIP 與法遵",
             align:"對應職缺 3 — 運用考核結果進行調薪, 升遷, 留任或資遣決策",
-            csum:"考核未連動薪酬與行動",
-            asum:"Staggered rollout (W0–W3) & KPI/OKR workflows",
+            csum:"At Nano Technology, performance outcomes were not systematically tied to compensation or corrective action.",
+            asum:"Deployed a staggered cross-functional rollout starting with HR alignment (W0), Line Manager onboarding (W1), and Payroll & Finance synchronization (W2), converging at W3 into a full-scale execution and dashboard tracking phase through W12. This standardized KPI/OKR workflows, directly linking results to salary reviews, promotions, and PIPs while ensuring full labor compliance. Integration of the Blue Section (Alignment / Kickoff): Clearly highlights the sequential alignment and kickoff cadence initiated by HR in W0, followed by Line Managers in W1, and Payroll & Finance in W2.\nIntegration of the Orange Section (Execution & Dashboard Tracking): Emphasizes W3 as the point of full convergence, launching a W12-long phase of comprehensive execution and dashboard tracking, which highlights the project's complete lifecycle from initial setup to long-term monitoring and land-and-expand execution.",
+            rsum:"法遵 95%+，0 爭議，敬業度 +15%",
+            context:"At Nano Technology, performance outcomes were not systematically tied to compensation or corrective action.",
+            action:"Deployed a staggered cross-functional rollout starting with HR alignment (W0), Line Manager onboarding (W1), and Payroll & Finance synchronization (W2), converging at W3 into a full-scale execution and dashboard tracking phase through W12. This standardized KPI/OKR workflows, directly linking results to salary reviews, promotions, and PIPs while ensuring full labor compliance. Integration of the Blue Section (Alignment / Kickoff): Clearly highlights the sequential alignment and kickoff cadence initiated by HR in W0, followed by Line Managers in W1, and Payroll & Finance in W2.\nIntegration of the Orange Section (Execution & Dashboard Tracking): Emphasizes W3 as the point of full convergence, launching a W12-long phase of comprehensive execution and dashboard tracking, which highlights the project's complete lifecycle from initial setup to long-term monitoring and land-and-expand execution.",
+            result:"Sustained 95%+ labor compliance with 0 labor disputes, alongside a 15% rise in engagement and 20% rise in productivity.",
+            takeaway:"證明績效制度能在類似離岸工程的技術製造場域中，同時驅動業務成果與零爭議的法規遵循。",
+            gantt:{
+              title:"績效推行看板",
+              rows:[
+                {name:"人資", align:[0,1], exec:[1,12]},
+                {name:"部門主管", align:[1,3], exec:[3,12]},
+                {name:"財務／薪資", align:[2,3], exec:[3,12]}
+              ]
+            }
+          }
+        ],
+        narrative:{
+          title:"How the Process Works",
+          intro:"A defensible performance system is built in layers, not rolled out overnight.",
+          steps:[
+            {h:"Diagnose the gap", d:"Audit existing appraisal practices to find where subjectivity or inconsistency is costing the business."},
+            {h:"Rebuild the framework", d:"Redesign job grading and competency rubrics so every role is evaluated against the same standard."},
+            {h:"Standardize the workflow", d:"Roll out one KPI/OKR evaluation cycle across all teams, regardless of location."},
+            {h:"Connect results to decisions", d:"Wire ratings directly into merit increases, promotion tracks, and PIP triggers, with compliance built in from the start."}
+          ],
+          closing:"A defensible, standardized performance system reduces the risk of disputes in a workforce that mixes technical, offshore, and onshore roles — exactly the profile Boskalis Taiwan needs to manage."
+        }
+      },
+      {
+        code:"T3",
+        title:"教育訓練體系與人才發展",
+        chart:{
+          type:"doughnut",
+          title:"Measured Impact",
+          metric:{label:"Onboarding Satisfaction", value:90}
+        },
+        stories:[
+          {
+            theme:"Standardized SOP Modules for Technical Ramp-Up",
+            align:"JD 1/3 — Maintain rotations, evaluations, and support workforce readiness",
+            csum:"Long ramp-up, high early error rate",
+            asum:"Standardized technical SOP training modules",
+            rsum:"Faster ramp-up, fewer errors",
+            context:"在 Nano Technology，工程與製造現場的新進技術人員上手週期長，初期現場操作失誤率偏高。",
+            action:"Designed standardized technical SOP training modules, integrated them into structured onboarding tracks, and linked training completion to performance evaluation.",
+            result:"Shortened technical ramp-up time and reduced operational error rates during the early tenure period.",
+            takeaway:"可直接應用於離岸海事工程人員的入職訓練，該場域對初期能力養成與安全合規要求極高。",
+            gantt:{
+              title:"Training Rollout Board",
+              rows:[
+                {name:"Engineering Ops", align:[0,2], exec:[2,8]},
+                {name:"Training Team", align:[0,3], exec:[3,10]},
+                {name:"New Hire Cohort", align:[3,4], exec:[4,12]}
+              ]
+            }
+          },
+          {
+            theme:"Frontline Pulse Checks and Mentor-Based Onboarding",
+            align:"JD 1 — Maintain attendance, evaluations, and employee readiness records",
+            csum:"No early-tenure support system",
+            asum:"Pulse-check surveys + mentor program",
+            rsum:"90%+ onboarding satisfaction",
+            context:"分散式技術團隊缺乏一致的任職初期支持機制，新人在達到完全生產力前有脫離風險。",
+            action:"Deployed frontline pulse-check surveys and a structured mentor program layered onto the SOP training roadmap.",
+            result:"Achieved a 90%+ onboarding satisfaction rate and elevated post-training performance ratings.",
+            takeaway:"為離岸派駐或現場工程人員建立技術信心與留任率的可複製模型。",
+            gantt:{
+              title:"Training Rollout Board",
+              rows:[
+                {name:"HRBP Team", align:[0,1], exec:[1,12]},
+                {name:"Mentors", align:[0,2], exec:[2,12]},
+                {name:"New Hires", align:[2,3], exec:[3,10]}
+              ]
+            }
+          }
+        ],
+        narrative:{
+          title:"How the Process Works",
+          intro:"Training systems only work when they are built from what actually happens on the floor.",
+          steps:[
+            {h:"Observe the floor", d:"Identify where new technical hires lose time or make errors during ramp-up."},
+            {h:"Build the SOP library", d:"Convert tribal knowledge into standardized, repeatable training modules."},
+            {h:"Layer in support", d:"Add mentor assignments and early pulse-check surveys so gaps surface before they become attrition."},
+            {h:"Close the loop", d:"Tie training completion to performance data, so the training program keeps improving itself."}
+          ],
+          closing:"在離岸海事工程場域中，快速且安全的技術上手不是加分項，而是直接關係到安全與作業就緒度的必要條件。"
+        }
+      },
+      {
+        code:"T4",
+        title:"Compensation, Work Rules & Compliance",
+        chart:{
+          type:"bar",
+          title:"Measured Impact",
+          metrics:[
+            {label:"On-Budget Salary Reviews", value:100},
+            {label:"Statutory Compliance (Zero Penalty)", value:100}
+          ]
+        },
+        stories:[
+          {
+            theme:"Multi-Regional C&B Benchmarking Model",
+            align:"JD 4 — Establish and maintain C&B systems and statutory benefits",
+            csum:"6 markets, diverging labor codes",
+            asum:"Regional pay model + standard payroll SOPs",
+            rsum:"Consistent, audit-ready pay decisions",
+            context:"Operating across 6 international markets at Ourbit & Bitget, statutory labor codes, payroll regulations, and pay competitiveness diverged significantly by jurisdiction.",
+            action:"Built a multi-regional compensation and benefits benchmarking model and standardized payroll and attendance SOPs across markets.",
+            result:"Enabled consistent, defensible pay decisions across all 6 markets while keeping payroll processes audit-ready.",
+            takeaway:"Directly maps to managing C&B and statutory compliance for a multinational offshore workforce operating under Taiwanese and international labor codes.",
+            gantt:{
+              title:"Compliance Cadence Board",
+              rows:[
+                {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
+                {name:"Product & Design", align:[1,3], exec:[3,11]},
+                {name:"Operations & Business", align:[2,4], exec:[4,12]}
+              ]
+            }
+          },
+          {
+            theme:"Zero-Penalty Compliance and On-Budget Salary Reviews",
+            align:"JD 4 — Maintain company work rules, statutory benefits, pensions, and HR reporting",
+            csum:"Overtime & benefits needed constant audit",
+            asum:"Recurring audits + optimized shift scheduling",
+            rsum:"100% on-budget, zero penalties",
+            context:"At Nano Technology's plant operations, working-hour tracking, overtime limits, and statutory benefit administration required continuous audit discipline.",
+            action:"Audited working hours and statutory benefits on a recurring basis, and optimized plant shift scheduling to control unnecessary overtime.",
+            result:"Executed 100% of salary reviews strictly on-budget and maintained a zero-penalty regulatory compliance record.",
+            takeaway:"Demonstrates readiness to manage statutory work-rule compliance and reporting in a regulated, safety-conscious engineering environment.",
+            gantt:{
+              title:"Compliance Cadence Board",
+              rows:[
+                {name:"Payroll", align:[0,1], exec:[1,12]},
+                {name:"Plant Ops", align:[0,2], exec:[2,12]},
+                {name:"Compliance / Legal", align:[1,2], exec:[2,12]}
+              ]
+            }
+          }
+        ],
+        narrative:{
+          title:"How the Process Works",
+          intro:"Compliance is not a checklist run once a year — it is a standing operating cycle.",
+          steps:[
+            {h:"Map the regulations", d:"Catalogue statutory requirements, payroll rules, and benefit obligations across every jurisdiction in scope."},
+            {h:"Build the pay model", d:"Create a C&B structure that stays competitive locally while remaining consistent globally."},
+            {h:"Standardize operations", d:"Roll out common payroll, attendance, and work-rule SOPs so every site runs the same playbook."},
+            {h:"Audit on a cycle", d:"Run recurring compliance checks before regulators do, catching issues while they are still cheap to fix."}
+          ],
+          closing:"This process is what produced a 100% on-budget salary review cycle and a zero-penalty compliance record — the track record Boskalis Taiwan needs for a regulated, safety-first industry."
+        }
+      },
+      {
+        code:"T5",
+        title:"Talent Acquisition & Sourcing",
+        chart:{
+          type:"bar",
+          title:"Measured Impact",
+          metrics:[
+            {label:"Interview Loop Reduction", value:20},
+            {label:"Time-to-Hire Reduction", value:20},
+            {label:"Offer Acceptance Rate", value:95}
+          ],
+          stat:{val:"120+", lbl:"Hires Delivered / Year"}
+        },
+        stories:[
+          {
+            theme:"AI-Driven Sourcing Funnel for High-Volume Technical Hiring",
+            align:"JD 2 — Plan and execute talent acquisition to resolve staffing bottlenecks",
+            csum:"Fast scaling across APAC & Europe",
+            asum:"New JDs + automated sourcing + AI monitoring",
+            rsum:"120+ hires/yr, -20% time-to-hire",
+            context:"At MEXC, technical and operations headcount needed to scale quickly across APAC and Europe under tight timelines.",
+            action:"Overhauled JD architecture, built automated sourcing funnels across technical talent networks, and deployed AI diagnostics to monitor regional compensation parity.",
+            result:"Delivered 120+ hires annually, shortened interview loops by 20%, cut engineering time-to-hire by 20%, and sustained a 95%+ offer acceptance rate.",
+            takeaway:"A directly applicable playbook for resolving technical and engineering staffing bottlenecks in an offshore project environment.",
+            gantt:{
+              title:"Hiring Funnel Board",
+              rows:[
+                {name:"Talent Sourcing", align:[0,1], exec:[1,12]},
+                {name:"Hiring Mgrs — APAC", align:[1,2], exec:[2,11]},
+                {name:"Hiring Mgrs — Europe", align:[2,3], exec:[3,12]}
+              ]
+            }
+          },
+          {
+            theme:"AI Org Intelligence for Headcount and Comp Parity",
+            align:"JD 2 — Selection, hiring, and headcount planning",
+            csum:"No real-time visibility into headcount gaps",
+            asum:"AI dashboards for headcount & pay parity",
+            rsum:"95%+ offer accept, lower turnover",
+            context:"At BitMart, recruiting leadership lacked real-time visibility into headcount gaps and compensation parity across Tech, Trading, and Regional Operations.",
+            action:"Architected AI-powered org intelligence dashboards (Claude Code/LLM-based) surfacing live headcount, retention, and comp parity signals to guide sourcing priorities.",
+            result:"Sustained 95%+ offer acceptance and reduced voluntary turnover by aligning sourcing effort with the highest-risk gaps.",
+            takeaway:"Shows how data-driven recruiting infrastructure can keep offshore project staffing proactive rather than reactive.",
+            gantt:{
+              title:"Hiring Funnel Board",
+              rows:[
+                {name:"Recruiting", align:[0,1], exec:[1,12]},
+                {name:"Tech", align:[1,2], exec:[2,12]},
+                {name:"Trading", align:[1,3], exec:[3,12]}
+              ]
+            }
+          }
+        ],
+        narrative:{
+          title:"How the Process Works",
+          intro:"Hitting hiring targets on a technical role is a pipeline problem before it is an interviewing problem.",
+          steps:[
+            {h:"Rebuild the JD", d:"Rewrite job descriptions around the real technical and operational requirements of the role, not generic templates."},
+            {h:"Build the funnel", d:"Stand up automated sourcing channels into technical and engineering talent networks."},
+            {h:"Monitor with data", d:"Use live dashboards to track compensation parity and time-to-hire, catching drop-off before it becomes a bottleneck."},
+            {h:"Iterate continuously", d:"Adjust sourcing and interview design based on what the data shows, not assumptions."}
+          ],
+          closing:"This is the same playbook needed to keep specialized offshore engineering roles staffed on schedule, without sacrificing candidate quality or pay competitiveness."
+        }
+      }
+    ],
+    labels:{c:"CONTEXT",a:"ACTION",r:"RESULT",tk:"TRANSFERABLE VALUE",align:"JD ALIGNMENT",fullDetail:"Full story detail",stepDetail:"Full process notes",alignPhase:"Alignment / Kickoff",execPhase:"Execution & Dashboard Tracking",weekAxis:"Quarter Timeline (Weeks)"}
+  },
+  zh: {
+    candidateName: "Vicky Chen 陳薇琪",
+    heroEyebrow: "目標職位 — 波斯卡利斯離岸海事工程台灣分公司 人力資源專員",
+    heroTitle: "跨國, 跨部門人資實績的 CAR 案例庫",
+    footer: "本內容彙整自經驗證之專業經歷 · Vicky Chen · 人力資源業務夥伴",
+    metrics: [
+      {val:"7+", lbl:"年人資實務經驗"},
+      {val:"95%+", lbl:"Offer 接受率"},
+      {val:"100%", lbl:"調薪案如期在預算內完成"},
+      {val:"0", lbl:"勞資爭議件數"},
+      {val:"C2", lbl:"英語流利程度"}
+    ],
+    tabs: [
+      {code:"T1", name:"人力資源策略與年度目標"},
+      {code:"T2", name:"績效管理與制度優化"},
+      {code:"T3", name:"教育訓練體系與人才發展"},
+      {code:"T4", name:"薪酬與獎酬制度、工作規則與法遵"},
+      {code:"T5", name:"人才招募"}
+    ],
+    sections: [
+      {
+        code:"T1",
+        title:"人力資源策略與年度目標",
+        chart:{
+          type:"bar",
+          title:"量化成果",
+          metrics:[
+            {label:"交付率提升", value:35},
+            {label:"交付速度提升", value:25},
+            {label:"員工敬業度提升", value:15}
+          ]
+        },
+        stories:[
+          {
+            theme:"將商業戰略轉化為部門級目標",
+            align:"對應職缺 1 — 向組織傳達年度人資戰略",
+            csum:"技術與商務目標脫節",
+            asum:"OKR＋雙週衝刺＋數據模型",
+            rsum:"交付速度 +25%",
+            context:"在 Bitmart 快速擴張期間，技術研發里程碑與商務運營目標逐漸脫節，導致跨團隊執行進度出現落差。",
+            action:"1. Blue Section (Alignment / Kickoff Phase)\nAction: \"Partnered with C-suite leadership to translate annual commercial strategy into team OKRs.\"\nDesign Logic: Focuses W0–W2 on aligning goals and OKRs with senior leadership rather than rushing deliverables.\nHighlight Detail: The commercial team completed alignment in W1—one week ahead of engineering—reflecting standard business operations where leadership must prioritize revenue targets first.\n\n2. Orange Section (Execution & Dashboard Tracking Phase)\nAction: \"Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress.\"\nDesign Logic: Shifts the project into a sustained, stable execution phase from W2 through the end of the quarter (W12).",
+            result:"專案交付速度提升 25%，跨團隊執行一致性顯著改善。",
+            takeaway:"可直接應用於波斯卡利斯的矩陣式組織架構，確保工程里程碑與跨部門商務目標保持一致。",
+            gantt:{
+              title:"OKR 拉齊看板（輕量化儀表板）",
+              rows:[
+                {name:"工程", align:[0,2], exec:[2,12]},
+                {name:"商務", align:[0,1], exec:[1,12]},
+                {name:"產品營運", align:[0,2], exec:[2,11]}
+              ]
+            }
+          },
+          {
+            theme:"統一 200+ 人組織的跨職能 OKR",
+            align:"對應職缺 1 — 維護人資基礎資料並隨編制成長傳達策略",
+            csum:"200+ 人，缺乏統一標準",
+            asum:"統一 OKR＋AI 組織儀表板",
+            rsum:"交付率 +35%，Offer 接受 95%+",
+            context:"擔任 BitMart 資深 HRBP 期間，支援技術、交易與區域營運三大團隊共 200+ 名員工，各職能團隊各自追蹤進度，缺乏統一交付標準。",
+            action:"統一各事業單位的跨職能 OKR，並運用 Claude Code / LLM 打造 AI 組織智能儀表板，即時監控編制、留任率與薪酬對標情況。",
+            result:"整體交付率提升 35%，同時維持 95%+ Offer 接受率並降低自願離職率。",
+            takeaway:"展現為離岸工程管理層提供即時、單一視角人力健康度儀表板的能力，橫跨技術與營運職能。",
+            gantt:{
+              title:"OKR 拉齊看板（輕量化儀表板）",
+              rows:[
+                {name:"技術", align:[0,2], exec:[2,12]},
+                {name:"交易", align:[0,2], exec:[2,12]},
+                {name:"區域營運", align:[1,3], exec:[3,12]}
+              ]
+            }
+          }
+        ],
+        narrative:{
+          title:"行動落地流程",
+          intro:"策略下達不是一次性的宣布，而是一套可重複執行的營運節奏。",
+          steps:[
+            {h:"藍色區段", d:"1. Blue Section (Alignment / Kickoff Phase)\nAction: \"Partnered with C-suite leadership to translate annual commercial strategy into team OKRs.\"\nDesign Logic: Focuses W0–W2 on aligning goals and OKRs with senior leadership rather than rushing deliverables.\nHighlight Detail: The commercial team completed alignment in W1—one week ahead of engineering—reflecting standard business operations where leadership must prioritize revenue targets first."},
+            {h:"設計部門級 OKR", d:"將年度目標拆解為可衡量、有明確負責人的部門目標，涵蓋工程、營運與支援職能。"},
+            {h:"橘色區段", d:"2. Orange Section (Execution & Dashboard Tracking Phase)\nAction: \"Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress.\"\nDesign Logic: Shifts the project into a sustained, stable execution phase from W2 through the end of the quarter (W12)."},
+            {h:"用數據追蹤", d:"建立輕量化儀表板，讓管理層即時掌握進度，而非等到季末才發現落差。"}
+          ],
+          closing:"對波斯卡利斯台灣而言，這代表離岸專案里程碑、船期與商務承諾能被納入同一套營運節奏追蹤，而非各部門各自為政。"
+        }
+      },
+      {
+        code:"T2",
+        title:"績效管理與制度優化",
+        chart:{
+          type:"bar",
+          title:"Measured Impact",
+          metrics:[
+            {label:"On-Time Appraisal Completion", value:100},
+            {label:"Labor Compliance Score", value:95},
+            {label:"Productivity Increase", value:20}
+          ]
+        },
+        stories:[
+          {
+            theme:"Rebuilding Job Grading and Competency Architecture",
+            align:"對應職缺 3 — 設計, 管理並執行績效管理制度",
+            csum:"Subjective reviews across 6 markets",
+            asum:"New competency rubrics + one shared framework",
+            rsum:"Consistent reviews across all 6 markets",
+            context:"Across the Bitmart and Ourbit ecosystem, okr appraisals were subjective and review cycles were fragmented across teams",
+            action:"Designed job level and competency rubrics and standardized performance review frameworks, replacing inconsistent local practices with one common structure.",
+            result:"Delivered consistent, standard framework forming the backbone for merit and promotion decisions.",
+            takeaway:"展現在分散的離岸與陸上工程團隊間統一評核標準的能力.",
+            gantt:{
+              title:"Performance Rollout Board",
+              rows:[
+                {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
+                {name:"Product & Design", align:[1,3], exec:[3,11]},
+                {name:"Operations & Business", align:[2,4], exec:[4,12]}
+              ]
+            }
+          },
+          {
+            theme:"將考核結果連動調薪、PIP 與法遵",
+            align:"對應職缺 3 — 運用考核結果進行調薪, 升遷, 留任或資遣決策",
+            csum:"At Nano Technology, performance outcomes were not systematically tied to compensation or corrective action.",
+            asum:"Deployed a staggered cross-functional rollout starting with HR alignment (W0), Line Manager onboarding (W1), and Payroll & Finance synchronization (W2), converging at W3 into a full-scale execution and dashboard tracking phase through W12. This standardized KPI/OKR workflows, directly linking results to salary reviews, promotions, and PIPs while ensuring full labor compliance. Integration of the Blue Section (Alignment / Kickoff): Clearly highlights the sequential alignment and kickoff cadence initiated by HR in W0, followed by Line Managers in W1, and Payroll & Finance in W2.\nIntegration of the Orange Section (Execution & Dashboard Tracking): Emphasizes W3 as the point of full convergence, launching a W12-long phase of comprehensive execution and dashboard tracking, which highlights the project's complete lifecycle from initial setup to long-term monitoring and land-and-expand execution.",
             rsum:"法遵 95%+，0 爭議，敬業度 +15%",
             context:"At Nano Technology, performance outcomes were not systematically tied to compensation or corrective action.",
             action:"Deployed a staggered cross-functional rollout starting with HR alignment (W0), Line Manager onboarding (W1), and Payroll & Finance synchronization (W2), converging at W3 into a full-scale execution and dashboard tracking phase through W12. This standardized KPI/OKR workflows, directly linking results to salary reviews, promotions, and PIPs while ensuring full labor compliance. Integration of the Blue Section (Alignment / Kickoff): Clearly highlights the sequential alignment and kickoff cadence initiated by HR in W0, followed by Line Managers in W1, and Payroll & Finance in W2.\nIntegration of the Orange Section (Execution & Dashboard Tracking): Emphasizes W3 as the point of full convergence, launching a W12-long phase of comprehensive execution and dashboard tracking, which highlights the project's complete lifecycle from initial setup to long-term monitoring and land-and-expand execution.",
