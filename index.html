@@ -1,1340 +1,170 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vicky Chen — CAR Story Bank / Boskalis Offshore Marine Engineering</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<style>
-  :root{
-    --navy:#0B2A3D;
-    --steel:#1B4965;
-    --deck:#EEF1F3;
-    --panel:#FFFFFF;
-    --ink:#12262E;
-    --mute:#5B6E76;
-    --amber:#E8963A;
-    --amber-dim:#F6E2C6;
-    --line:#D6DCDE;
-    --good:#2E7D5B;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--deck);
-    color:var(--ink);
-    font-family:'Inter','Noto Sans TC',sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  [lang-zh]{font-family:'Noto Sans TC','Inter',sans-serif;}
-  .mono{font-family:'IBM Plex Mono',monospace;}
-  h1,h2,h3,.display{font-family:'Space Grotesk','Noto Sans TC',sans-serif;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano Technology 績效與考核推廣看板 (Performance Rollout Board)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            padding: 30px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+        }
+        h1 {
+            font-size: 22px;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 24px;
+        }
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+        .bg-kickoff { background-color: #1a365d; }
+        .bg-execution { background-color: #dd6b20; }
 
-  /* ===== Top bar ===== */
-  .topbar{
-    background:var(--navy);
-    color:#fff;
-    padding:14px 28px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    border-bottom:3px solid var(--amber);
-    position:sticky; top:0; z-index:40;
-  }
-  .brandmark{display:flex; align-items:center; gap:12px;}
-  .brandmark .coord{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px;
-    color:var(--amber-dim);
-    letter-spacing:.02em;
-  }
-  .brandmark .name{font-size:16px; font-weight:600;}
-  .langtoggle{
-    display:flex;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.25);
-    border-radius:999px;
-    padding:3px;
-  }
-  .langtoggle button{
-    border:none; background:transparent; color:#cfe0e8;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px; font-weight:600;
-    padding:6px 16px; border-radius:999px; cursor:pointer;
-    transition:background .2s, color .2s;
-  }
-  .langtoggle button.active{background:var(--amber); color:#241705;}
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 15px 0;
+            align-items: center;
+        }
+        .group-label {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 14px;
+        }
+        .track-container {
+            position: relative;
+            background: #edf2f7;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* 視覺化進度條 (共 12 週，每週約 8.33%) */
+        .bar {
+            position: absolute;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            font-size: 11px;
+            color: #fff;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .bar-kickoff {
+            background-color: #1a365d;
+        }
+        .bar-execution {
+            background-color: #dd6b20;
+        }
 
-  /* ===== Hero ===== */
-  .hero{
-    background:linear-gradient(180deg, var(--navy) 0%, var(--steel) 100%);
-    color:#fff;
-    padding:44px 28px 32px;
-    position:relative;
-    overflow:hidden;
-  }
-  .hero::after{
-    content:"";
-    position:absolute; inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
-    background-size:42px 42px;
-    pointer-events:none;
-  }
-  .hero-inner{max-width:1180px; margin:0 auto; position:relative;}
-  .hero-eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:12px; color:var(--amber-dim); margin-bottom:12px;
-  }
-  .hero h1{font-size:30px; font-weight:700; max-width:820px; line-height:1.2;}
-
-  /* ===== Metric banner ===== */
-  .metrics{
-    max-width:1180px; margin:26px auto 0;
-    display:grid; grid-template-columns:repeat(5,1fr); gap:1px;
-    background:rgba(255,255,255,.18);
-    border:1px solid rgba(255,255,255,.18);
-    border-radius:4px; overflow:hidden;
-  }
-  .metric-cell{
-    background:rgba(11,42,61,.55);
-    padding:18px 16px;
-  }
-  .metric-cell .val{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:26px; font-weight:600; color:var(--amber);
-  }
-  .metric-cell .lbl{font-size:12px; color:#C8D8DF; margin-top:6px;}
-
-  /* ===== Tabs ===== */
-  .tabbar-wrap{
-    background:var(--panel);
-    border-bottom:1px solid var(--line);
-    position:sticky; top:57px; z-index:30;
-  }
-  .tabbar{
-    max-width:1180px; margin:0 auto;
-    display:flex; overflow-x:auto;
-  }
-  .tab{
-    flex:1 1 auto; min-width:150px;
-    text-align:left;
-    background:transparent; border:none; cursor:pointer;
-    padding:16px 18px 13px;
-    border-bottom:3px solid transparent;
-    color:var(--mute);
-    display:flex; flex-direction:column; gap:3px;
-  }
-  .tab .tcode{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--mute);}
-  .tab .tname{font-size:13.5px; font-weight:600; color:var(--ink);}
-  .tab.active{border-bottom-color:var(--amber); background:var(--deck);}
-  .tab.active .tcode{color:var(--amber);}
-
-  /* ===== Content ===== */
-  main{max-width:1180px; margin:0 auto; padding:30px 28px 80px;}
-  .section-head{margin-bottom:16px;}
-  .section-head .tcode{font-family:'IBM Plex Mono',monospace; color:var(--amber); font-size:12px;}
-  .section-head h2{font-size:22px; margin-top:4px;}
-
-  /* ===== Chart panel (primary visual) ===== */
-  .chart-panel{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:2px;
-    margin-bottom:18px;
-    padding:22px 26px 18px;
-    display:grid;
-    grid-template-columns:1fr auto;
-    gap:24px;
-    align-items:center;
-  }
-  .chart-panel h4{
-    font-size:12px;
-    font-family:'IBM Plex Mono',monospace;
-    color:var(--steel);
-    letter-spacing:.02em;
-    margin-bottom:14px;
-  }
-  .chart-body{display:flex; align-items:center; gap:28px; flex-wrap:wrap;}
-  .chart-canvas-wrap{position:relative; height:230px; flex:1 1 340px; min-width:260px;}
-  .chart-canvas-wrap.doughnut-wrap{flex:0 0 210px; width:210px; height:210px;}
-  .chart-stat{
-    flex:0 0 auto;
-    border-left:1px solid var(--line);
-    padding-left:24px;
-    text-align:left;
-  }
-  .chart-stat .val{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:38px; font-weight:600; color:var(--amber);
-    line-height:1;
-  }
-  .chart-stat .lbl{font-size:12px; color:var(--mute); margin-top:8px; max-width:140px;}
-  .doughnut-center{
-    position:absolute; inset:0;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    pointer-events:none;
-  }
-  .doughnut-center .val{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:30px; font-weight:600; color:var(--navy);
-  }
-  .doughnut-center .lbl{font-size:11.5px; color:var(--mute); text-align:center; max-width:130px; margin-top:4px;}
-
-  @media (max-width:860px){
-    .chart-panel{grid-template-columns:1fr;}
-    .chart-stat{border-left:none; border-top:1px solid var(--line); padding-left:0; padding-top:14px;}
-  }
-
-  /* ===== Story cards — visual flow ===== */
-  .card{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-left:4px solid var(--steel);
-    border-radius:2px;
-    margin-bottom:16px;
-    overflow:hidden;
-  }
-  .card-head{
-    padding:18px 24px 4px;
-    display:flex; justify-content:space-between; align-items:flex-start; gap:20px;
-    flex-wrap:wrap;
-  }
-  .card-head h3{font-size:16.5px; color:var(--navy);}
-  .align-tag{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:10.5px; color:var(--steel);
-    background:var(--deck);
-    border:1px solid var(--line);
-    padding:5px 9px; border-radius:2px;
-    max-width:320px;
-  }
-  .align-tag .k{color:var(--amber); font-weight:600;}
-
-  .car-flow{display:flex; align-items:flex-start; gap:0; padding:18px 22px 4px; flex-wrap:wrap;}
-  .flow-node{flex:1 1 140px; text-align:center; padding:0 6px; min-width:118px;}
-  .fn-icon{width:42px; height:42px; margin:0 auto 9px; border-radius:50%; background:var(--deck); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--steel);}
-  .fn-icon svg{width:20px; height:20px;}
-  .fn-icon.amber{background:var(--amber-dim); color:#9C5A0E; border-color:var(--amber);}
-  .fn-icon.result{background:var(--navy); color:#fff; border-color:var(--navy);}
-  .fn-text{font-size:12.5px; font-weight:600; color:var(--ink); line-height:1.35;}
-  .fn-text.strong{color:var(--navy);}
-  .flow-arrow{flex:0 0 auto; color:var(--line); align-self:center; padding-top:10px;}
-  .flow-arrow svg{width:18px; height:18px;}
-  @media (max-width:700px){
-    .car-flow{flex-direction:column; align-items:stretch;}
-    .flow-arrow{transform:rotate(90deg); margin:0 auto;}
-  }
-
-  .takeaway{
-    background:var(--navy); color:#fff;
-    padding:12px 24px;
-    font-size:13px;
-    display:flex; gap:10px; align-items:baseline;
-    margin-top:12px;
-  }
-  .takeaway .icon{flex-shrink:0; color:var(--amber); display:flex; align-items:center;}
-  .takeaway .icon svg{width:15px; height:15px;}
-
-  .gantt-panel{
-    margin:14px 24px 6px;
-    padding:16px 18px 12px;
-    background:var(--deck);
-    border:1px solid var(--line);
-    border-radius:2px;
-  }
-  .gantt-panel .gtitle{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:11px; color:var(--steel);
-    margin-bottom:2px;
-  }
-  .gantt-legend{
-    display:flex; gap:16px; margin:6px 0 10px;
-    font-size:11px; color:var(--mute);
-  }
-  .gantt-legend span{display:inline-flex; align-items:center; gap:6px;}
-  .gantt-legend .dot{width:9px; height:9px; border-radius:2px; display:inline-block;}
-  .gantt-canvas-wrap{position:relative; width:100%;}
-
-  .fulltext{margin:14px 24px 16px; border-top:1px dashed var(--line); padding-top:10px;}
-  .fulltext summary{cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--steel); list-style:none; display:flex; align-items:center; gap:6px; user-select:none;}
-  .fulltext summary::-webkit-details-marker{display:none;}
-  .fulltext summary::before{content:"+"; color:var(--amber); font-weight:700; font-size:14px; line-height:1;}
-  .fulltext[open] summary::before{content:"\2013";}
-  .fulltext[open] summary{margin-bottom:12px;}
-  .ft-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding-bottom:6px;}
-  .ft-grid .clabel{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--amber); display:block; margin-bottom:6px;}
-  .ft-grid p{font-size:12.5px; color:var(--mute);}
-  @media (max-width:700px){.ft-grid{grid-template-columns:1fr;}}
-
-  /* ===== Narrative — visual stepper ===== */
-  .narrative{
-    margin-top:6px;
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-top:3px solid var(--amber);
-    border-radius:2px;
-    padding:22px 26px 18px;
-  }
-  .narrative h4{font-size:14px; color:var(--navy); margin-bottom:4px;}
-  .narrative .nintro{font-size:12.5px; color:var(--mute); margin-bottom:18px; max-width:680px;}
-
-  .stepper{display:flex; align-items:flex-start; padding:2px 2px 4px;}
-  .step-node{display:flex; flex-direction:column; align-items:center; flex:0 0 auto; text-align:center; padding:0 4px;}
-  .step-circle{width:32px; height:32px; border-radius:50%; background:var(--navy); color:#fff; font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600; display:flex; align-items:center; justify-content:center; margin-bottom:8px;}
-  .step-title{font-size:11.5px; font-weight:600; color:var(--ink); max-width:108px;}
-  .step-line{flex:1 1 auto; height:2px; background:var(--line); margin-top:16px; min-width:16px;}
-  @media (max-width:700px){
-    .stepper{flex-direction:column; align-items:flex-start;}
-    .step-node{flex-direction:row; text-align:left; gap:10px; width:100%;}
-    .step-title{max-width:none;}
-    .step-line{width:2px; height:14px; margin:0 0 0 15px;}
-  }
-
-  .step-details-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding:12px 0 2px;}
-  .step-details-grid h5{font-size:12px; color:var(--navy); margin-bottom:4px;}
-  .step-details-grid p{font-size:11.5px; color:var(--mute);}
-  @media (max-width:860px){.step-details-grid{grid-template-columns:1fr 1fr;}}
-  @media (max-width:520px){.step-details-grid{grid-template-columns:1fr;}}
-
-  .narrow{
-    margin-top:16px;
-    font-size:13px;
-    color:var(--ink);
-    background:var(--amber-dim);
-    border-left:3px solid var(--amber);
-    padding:11px 15px;
-  }
-
-  footer{
-    text-align:center; padding:26px; color:var(--mute); font-size:12px;
-    font-family:'IBM Plex Mono',monospace;
-  }
-</style>
+        .axis {
+            grid-column: 2;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #a0aec0;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brandmark">
-    <div class="coord mono">HRBP · STORY BANK</div>
-    <div class="name" data-i18n="candidateName">Vicky Chen</div>
-  </div>
-  <div class="langtoggle">
-    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-    <button id="btn-zh" onclick="setLang('zh')">繁中</button>
-  </div>
-</div>
+    <div class="container">
+        <h1>Nano Technology 跨職能績效考核推廣看板</h1>
+        <p class="subtitle">交錯式跨部門導入：從 HR 對齊、主管培訓到薪酬同步，全面串聯 KPI/OKR 與薪酬、晉升及 PIP</p>
 
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow mono" data-i18n="heroEyebrow">TARGET ROLE — HR GENERALIST, BOSKALIS OFFSHORE MARINE ENGINEERING (TAIWAN BRANCH)</div>
-    <h1 data-i18n="heroTitle">A CAR Evidence Bank for Cross-Border, Cross-Functional HR Delivery</h1>
-    <div class="metrics" id="metrics"></div>
-  </div>
-</div>
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color bg-kickoff"></div>
+                <span>藍色區塊：對齊與啟動 (Alignment / Kickoff)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color bg-execution"></div>
+                <span>橘色區塊：執行與儀表板追蹤 (Execution & Tracking)</span>
+            </div>
+        </div>
 
-<div class="tabbar-wrap">
-  <div class="tabbar" id="tabbar"></div>
-</div>
+        <div class="timeline-grid">
+            <!-- HR 團隊對齊 -->
+            <div class="group-label">HR 團隊對齊<br><span style="font-size: 11px; color: #718096;">(HR Alignment)</span></div>
+            <div class="track-container">
+                <!-- W0 - W2 -->
+                <div class="bar bar-kickoff" style="left: 0%; width: 16.6%;">對齊 (W0-W2)</div>
+                <!-- W2 - W12 執行追蹤 -->
+                <div class="bar bar-execution" style="left: 16.6%; width: 83.3%;">全面執行與追蹤 (W2-W12)</div>
+            </div>
 
-<main id="main"></main>
+            <!-- 線上主管培訓 -->
+            <div class="group-label">線上一線主管培訓<br><span style="font-size: 11px; color: #718096;">(Line Manager Onboarding)</span></div>
+            <div class="track-container">
+                <!-- W1 - W3 -->
+                <div class="bar bar-kickoff" style="left: 8.3%; width: 16.6%;">對齊 (W1-W3)</div>
+                <!-- W3 - W12 執行追蹤 (W3 聚合為全面執行起點) -->
+                <div class="bar bar-execution" style="left: 25%; width: 75%;">全面執行與追蹤 (W3-W12)</div>
+            </div>
 
-<footer data-i18n="footer">Compiled from verified professional experience · Vicky Chen · HR Business Partner</footer>
+            <!-- 薪酬與財務同步 -->
+            <div class="group-label">薪酬與財務同步<br><span style="font-size: 11px; color: #718096;">(Payroll & Finance Sync)</span></div>
+            <div class="track-container">
+                <!-- W2 - W4 -->
+                <div class="bar bar-kickoff" style="left: 16.6%; width: 16.6%;">對齊 (W2-W4)</div>
+                <!-- W3 - W12 執行追蹤 -->
+                <div class="bar bar-execution" style="left: 25%; width: 75%;">全面執行與追蹤 (W3-W12)</div>
+            </div>
 
-<script>
-const ICON = {
-  c: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
-  a: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
-  r: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
-  arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
-  star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
-};
-
-const DATA = {
-  en: {
-    candidateName: "Vicky Chen",
-    heroEyebrow: "TARGET ROLE — HR GENERALIST, BOSKALIS OFFSHORE MARINE ENGINEERING (TAIWAN BRANCH)",
-    heroTitle: "A CAR Evidence Bank for Cross-Border, Cross-Functional HR Delivery",
-    footer: "Compiled from verified professional experience · Vicky Chen · HR Business Partner",
-    metrics: [
-      {val:"7+", lbl:"Years HR Experience"},
-      {val:"95%+", lbl:"Offer Acceptance Rate"},
-      {val:"100%", lbl:"On-Budget Salary Reviews"},
-      {val:"0", lbl:"Labor Disputes"},
-      {val:"C2", lbl:"English Fluency"}
-    ],
-    tabs: [
-      {code:"T1", name:"HR Strategy & Annual Goals"},
-      {code:"T2", name:"Performance Management & System Optimization"},
-      {code:"T3", name:"Training Systems & Talent Development"},
-      {code:"T4", name:"Compensation, Work Rules & Compliance"},
-      {code:"T5", name:"Talent Acquisition & Sourcing"}
-    ],
-    sections: [
-      {
-        code:"T1",
-        title:"HR Strategy & Annual Goals",
-        chart:{
-          type:"bar",
-          title:"Measured Impact",
-          metrics:[
-            {label:"Delivery Rate Lift", value:35},
-            {label:"Delivery Speed Increase", value:25},
-            {label:"Employee Engagement Lift", value:15}
-          ]
-        },
-        stories:[
-          {
-            theme:"Turning Commercial Strategy into Team-Level Goals",
-            align:"JD 1 — Share the annual HR strategy across the organization",
-            csum:"Engineering & commercial targets drifting apart",
-            asum:"Goals rolled out via OKRs, sprints & data",
-            rsum:"+25% delivery speed",
-            context:"During rapid expansion at Bitmart, technical engineering milestones and commercial targets drifted out of alignment, causing execution slippage across teams.",
-            action:"1. Blue Section (Alignment / Kickoff Phase)\nAction: \"Partnered with C-suite leadership to translate annual commercial strategy into team OKRs.\"\nDesign Logic: Focuses W0–W2 on aligning goals and OKRs with senior leadership rather than rushing deliverables.\nHighlight Detail: The commercial team completed alignment in W1—one week ahead of engineering—reflecting standard business operations where leadership must prioritize revenue targets first.\n\n2. Orange Section (Execution & Dashboard Tracking Phase)\nAction: \"Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress.\"\nDesign Logic: Shifts the project into a sustained, stable execution phase from W2 through the end of the quarter (W12).",
-            result:"Increased project delivery speed by 25% and improved cross-team execution consistency.",
-            takeaway:"Directly transferable to Boskalis' matrix structure, where engineering milestones must stay aligned with commercial and operational targets across departments.",
-            gantt:{
-              title:"OKR Alignment Board (Lightweight Dashboard)",
-              rows:[
-                {name:"Engineering", align:[0,2], exec:[2,12]},
-                {name:"Commercial", align:[0,1], exec:[1,12]},
-                {name:"Product Ops", align:[0,2], exec:[2,11]}
-              ]
-            }
-          },
-          {
-            theme:"Unifying Cross-Functional OKRs Across a 200+ Person Org",
-            align:"JD 1 — Maintain HR records and share strategy across a growing headcount",
-            csum:"200+ staff, no shared delivery standard",
-            asum:"Unified OKRs + AI org dashboards",
-            rsum:"+35% delivery rate, 95%+ offer accept",
-            context:"As Senior HRBP at BitMart, supporting 200+ employees across Tech, Trading, and Regional Operations, functional teams tracked progress independently with no shared delivery standard.",
-            action:"Unified cross-functional OKRs across all business units and architected AI-powered org intelligence dashboards (built on Claude Code/LLMs) covering headcount, retention, and comp parity.",
-            result:"Lifted overall delivery rate by 35% while sustaining a 95%+ offer acceptance rate and reducing voluntary turnover.",
-            takeaway:"Demonstrates the ability to give offshore engineering leadership a single, real-time view of workforce health across technical and operational functions.",
-            gantt:{
-              title:"OKR Alignment Board (Lightweight Dashboard)",
-              rows:[
-                {name:"Tech", align:[0,2], exec:[2,12]},
-                {name:"Trading", align:[0,2], exec:[2,12]},
-                {name:"Regional Ops", align:[1,3], exec:[3,12]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"Rolling out a strategy is not a single announcement — it is a repeatable operating rhythm.",
-          steps:[
-            {h:"Align with leadership", d:"Translate top-line commercial and project targets into a shared language every department can act on."},
-            {h:"Set department OKRs", d:"Break annual goals into measurable, owned objectives for engineering, operations, and support functions."},
-            {h:"Run a delivery cadence", d:"Bi-weekly cross-functional retrospectives surface blockers early and keep execution honest."},
-            {h:"Track it with data", d:"Build lightweight dashboards so leadership sees progress in real time rather than at quarter-end."}
-          ],
-          closing:"For Boskalis Taiwan, this means offshore project milestones, vessel schedules, and commercial commitments can be tracked against one shared operating rhythm — not managed in departmental silos."
-        }
-      },
-      {
-        code:"T2",
-        title:"Performance Management & System Optimization",
-        chart:{
-          type:"bar",
-          title:"Measured Impact",
-          metrics:[
-            {label:"On-Time Appraisal Completion", value:100},
-            {label:"Labor Compliance Score", value:95},
-            {label:"Productivity Increase", value:20}
-          ]
-        },
-        stories:[
-          {
-            theme:"Rebuilding Job Grading and Competency Architecture",
-            align:"JD 3 — Design, manage, and execute performance management systems",
-            csum:"Subjective reviews across 6 markets",
-            asum:"New competency rubrics + one shared framework",
-            rsum:"Consistent reviews across all 6 markets",
-            context:"Across the Bitmart and Ourbit ecosystem, okr appraisals were subjective and review cycles were fragmented across teams",
-            action:"Designed job level and competency rubrics and standardized performance review frameworks, replacing inconsistent local practices with one common structure.",
-            result:"Delivered consistent, standard framework forming the backbone for merit and promotion decisions.",
-            takeaway:"Shows the capacity to standardize evaluation criteria across dispersed offshore and onshore engineering teams.",
-            gantt:{
-              title:"Performance Rollout Board",
-              rows:[
-                {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
-                {name:"Product & Design", align:[0,2], exec:[2,10]},
-                {name:"Operations & Business", align:[0,2], exec:[2,10]}
-              ]
-            }
-          },
-          {
-            theme:"Linking Ratings to Merit, PIPs, and Compliance",
-            align:"JD 3 — Use evaluation results for merit increases, promotions, retention, or separation",
-            csum:"Ratings not tied to pay or action",
-            asum:"KPI/OKR results linked to pay & PIP",
-            rsum:"95%+ compliance, 0 disputes, +15% engagement",
-            context:"At Nano Technology, an engineering and tech manufacturing environment, performance outcomes were not systematically tied to compensation or corrective action.",
-            action:"Standardized KPI/OKR evaluation workflows and connected results directly to salary reviews, promotion tracks, and PIP interventions, while maintaining full labor-law compliance.",
-            result:"Sustained 95%+ labor compliance with 0 labor disputes, alongside a 15% rise in engagement and 20% rise in productivity.",
-            takeaway:"Proves performance systems can drive both business outcomes and zero-dispute compliance in a technical manufacturing setting comparable to offshore operations.",
-            gantt:{
-              title:"Performance Rollout Board",
-              rows:[
-                {name:"HR", align:[0,1], exec:[1,12]},
-                {name:"Line Managers", align:[1,3], exec:[3,12]},
-                {name:"Payroll & Finance", align:[2,3], exec:[3,12]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"A defensible performance system is built in layers, not rolled out overnight.",
-          steps:[
-            {h:"Diagnose the gap", d:"Audit existing appraisal practices to find where subjectivity or inconsistency is costing the business."},
-            {h:"Rebuild the framework", d:"Redesign job grading and competency rubrics so every role is evaluated against the same standard."},
-            {h:"Standardize the workflow", d:"Roll out one KPI/OKR evaluation cycle across all teams, regardless of location."},
-            {h:"Connect results to decisions", d:"Wire ratings directly into merit increases, promotion tracks, and PIP triggers, with compliance built in from the start."}
-          ],
-          closing:"A defensible, standardized performance system reduces the risk of disputes in a workforce that mixes technical, offshore, and onshore roles — exactly the profile Boskalis Taiwan needs to manage."
-        }
-      },
-      {
-        code:"T3",
-        title:"Training Systems & Talent Development",
-        chart:{
-          type:"doughnut",
-          title:"Measured Impact",
-          metric:{label:"Onboarding Satisfaction", value:90}
-        },
-        stories:[
-          {
-            theme:"Standardized SOP Modules for Technical Ramp-Up",
-            align:"JD 1/3 — Maintain rotations, evaluations, and support workforce readiness",
-            csum:"Long ramp-up, high early error rate",
-            asum:"Standardized technical SOP training modules",
-            rsum:"Faster ramp-up, fewer errors",
-            context:"At Nano Technology, new technical hires in engineering and manufacturing operations faced long ramp-up periods and elevated early error rates on the floor.",
-            action:"Designed standardized technical SOP training modules, integrated them into structured onboarding tracks, and linked training completion to performance evaluation.",
-            result:"Shortened technical ramp-up time and reduced operational error rates during the early tenure period.",
-            takeaway:"Directly applicable to onboarding offshore marine engineering personnel, where early competency and safety compliance are critical.",
-            gantt:{
-              title:"Training Rollout Board",
-              rows:[
-                {name:"Engineering Ops", align:[0,2], exec:[2,8]},
-                {name:"Training Team", align:[0,3], exec:[3,10]},
-                {name:"New Hire Cohort", align:[3,4], exec:[4,12]}
-              ]
-            }
-          },
-          {
-            theme:"Frontline Pulse Checks and Mentor-Based Onboarding",
-            align:"JD 1 — Maintain attendance, evaluations, and employee readiness records",
-            csum:"No early-tenure support system",
-            asum:"Pulse-check surveys + mentor program",
-            rsum:"90%+ onboarding satisfaction",
-            context:"Distributed technical teams lacked a consistent early-tenure support mechanism, risking disengagement before new hires reached full productivity.",
-            action:"Deployed frontline pulse-check surveys and a structured mentor program layered onto the SOP training roadmap.",
-            result:"Achieved a 90%+ onboarding satisfaction rate and elevated post-training performance ratings.",
-            takeaway:"A repeatable model for building technical confidence and retention among offshore-deployed or field-based engineering staff.",
-            gantt:{
-              title:"Training Rollout Board",
-              rows:[
-                {name:"HRBP Team", align:[0,1], exec:[1,12]},
-                {name:"Mentors", align:[0,2], exec:[2,12]},
-                {name:"New Hires", align:[2,3], exec:[3,10]}
-              ]
-            }
-          }
-      ],
-      narrative:{
-        title:"How the Process Works",
-        intro:"Training systems only work when they are built from what actually happens on the floor.",
-        steps:[
-          {h:"Observe the floor", d:"Identify where new technical hires lose time or make errors during ramp-up."},
-          {h:"Build the SOP library", d:"Convert tribal knowledge into standardized, repeatable training modules."},
-          {h:"Layer in support", d:"Add mentor assignments and early pulse-check surveys so gaps surface before they become attrition."},
-          {h:"Close the loop", d:"Tie training completion to performance data, so the training program keeps improving itself."}
-        ],
-        closing:"In an offshore marine engineering setting, fast and safe technical ramp-up is not a nice-to-have — it directly affects safety and operational readiness."
-      }
-    },
-    {
-      code:"T4",
-      title:"Compensation, Work Rules & Compliance",
-      chart:{
-        type:"bar",
-        title:"Measured Impact",
-        metrics:[
-          {label:"On-Budget Salary Reviews", value:100},
-          {label:"Statutory Compliance (Zero Penalty)", value:100}
-        ]
-      },
-      stories:[
-        {
-          theme:"Multi-Regional C&B Benchmarking Model",
-          align:"JD 4 — Establish and maintain C&B systems and statutory benefits",
-          csum:"6 markets, diverging labor codes",
-          asum:"Regional pay model + standard payroll SOPs",
-          rsum:"Consistent, audit-ready pay decisions",
-          context:"Operating across 6 international markets at Ourbit & Bitget, statutory labor codes, payroll regulations, and pay competitiveness diverged significantly by jurisdiction.",
-          action:"Built a multi-regional compensation and benefits benchmarking model and standardized payroll and attendance SOPs across markets.",
-          result:"Enabled consistent, defensible pay decisions across all 6 markets while keeping payroll processes audit-ready.",
-          takeaway:"Directly maps to managing C&B and statutory compliance for a multinational offshore workforce operating under Taiwanese and international labor codes.",
-          gantt:{
-            title:"Compliance Cadence Board",
-            rows:[
-              {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
-              {name:"Product & Design", align:[0,2], exec:[2,10]},
-              {name:"Operations & Business", align:[0,2], exec:[2,10]}
-            ]
-          }
-        },
-        {
-          theme:"Zero-Penalty Compliance and On-Budget Salary Reviews",
-          align:"JD 4 — Maintain company work rules, statutory benefits, pensions, and HR reporting",
-          csum:"Overtime & benefits needed constant audit",
-          asum:"Recurring audits + optimized shift scheduling",
-          rsum:"100% on-budget, zero penalties",
-          context:"At Nano Technology's plant operations, working-hour tracking, overtime limits, and statutory benefit administration required continuous audit discipline.",
-          action:"Audited working hours and statutory benefits on a recurring basis, and optimized plant shift scheduling to control unnecessary overtime.",
-          result:"Executed 100% of salary reviews strictly on-budget and maintained a zero-penalty regulatory compliance record.",
-          takeaway:"Demonstrates readiness to manage statutory work-rule compliance and reporting in a regulated, safety-conscious engineering environment.",
-          gantt:{
-            title:"Compliance Cadence Board",
-            rows:[
-              {name:"Payroll", align:[0,1], exec:[1,12]},
-              {name:"Plant Ops", align:[0,2], exec:[2,12]},
-              {name:"Compliance / Legal", align:[1,2], exec:[2,12]}
-            ]
-          }
-        }
-      ],
-      narrative:{
-        title:"How the Process Works",
-        intro:"Compliance is not a checklist run once a year — it is a standing operating cycle.",
-        steps:[
-          {h:"Map the regulations", d:"Catalogue statutory requirements, payroll rules, and benefit obligations across every jurisdiction in scope."},
-          {h:"Build the pay model", d:"Create a C&B structure that stays competitive locally while remaining consistent globally."},
-          {h:"Standardize operations", d:"Roll out common payroll, attendance, and work-rule SOPs so every site runs the same playbook."},
-          {h:"Audit on a cycle", d:"Run recurring compliance checks before regulators do, catching issues while they are still cheap to fix."}
-        ],
-        closing:"This process is what produced a 100% on-budget salary review cycle and a zero-penalty compliance record — the track record Boskalis Taiwan needs for a regulated, safety-first industry."
-      }
-    },
-    {
-      code:"T5",
-      title:"Talent Acquisition & Sourcing",
-      chart:{
-        type:"bar",
-        title:"Measured Impact",
-        metrics:[
-          {label:"Interview Loop Reduction", value:20},
-          {label:"Time-to-Hire Reduction", value:20},
-          {label:"Offer Acceptance Rate", value:95}
-        ],
-        stat:{val:"120+", lbl:"Hires Delivered / Year"}
-      },
-      stories:[
-        {
-          theme:"AI-Driven Sourcing Funnel for High-Volume Technical Hiring",
-          align:"JD 2 — Plan and execute talent acquisition to resolve staffing bottlenecks",
-          csum:"Fast scaling across APAC & Europe",
-          asum:"New JDs + automated sourcing + AI monitoring",
-          rsum:"120+ hires/yr, -20% time-to-hire",
-          context:"At MEXC, technical and operations headcount needed to scale quickly across APAC and Europe under tight timelines.",
-          action:"Overhauled JD architecture, built automated sourcing funnels across technical talent networks, and deployed AI diagnostics to monitor regional compensation parity.",
-          result:"Delivered 120+ hires annually, shortened interview loops by 20%, cut engineering time-to-hire by 20%, and sustained a 95%+ offer acceptance rate.",
-          takeaway:"A directly applicable playbook for resolving technical and engineering staffing bottlenecks in an offshore project environment.",
-          gantt:{
-            title:"Hiring Funnel Board",
-            rows:[
-              {name:"Talent Sourcing", align:[0,1], exec:[1,12]},
-              {name:"Hiring Mgrs — APAC", align:[1,2], exec:[2,11]},
-              {name:"Hiring Mgrs — Europe", align:[2,3], exec:[3,12]}
-            ]
-          }
-        },
-        {
-          theme:"AI Org Intelligence for Headcount and Comp Parity",
-          align:"JD 2 — Selection, hiring, and headcount planning",
-          csum:"No real-time visibility into headcount gaps",
-          asum:"AI dashboards for headcount & pay parity",
-          rsum:"95%+ offer accept, lower turnover",
-          context:"At BitMart, recruiting leadership lacked real-time visibility into headcount gaps and compensation parity across Tech, Trading, and Regional Operations.",
-          action:"Architected AI-powered org intelligence dashboards (Claude Code/LLM-based) surfacing live headcount, retention, and comp parity signals to guide sourcing priorities.",
-          result:"Sustained 95%+ offer acceptance and reduced voluntary turnover by aligning sourcing effort with the highest-risk gaps.",
-          takeaway:"Shows how data-driven recruiting infrastructure can keep offshore project staffing proactive rather than reactive.",
-          gantt:{
-            title:"Hiring Funnel Board",
-            rows:[
-              {name:"Recruiting", align:[0,1], exec:[1,12]},
-              {name:"Tech", align:[1,2], exec:[2,12]},
-              {name:"Trading", align:[1,3], exec:[3,12]}
-            ]
-          }
-        }
-      ],
-      narrative:{
-        title:"How the Process Works",
-        intro:"Hitting hiring targets on a technical role is a pipeline problem before it is an interviewing problem.",
-        steps:[
-          {h:"Rebuild the JD", d:"Rewrite job descriptions around the real technical and operational requirements of the role, not generic templates."},
-          {h:"Build the funnel", d:"Stand up automated sourcing channels into technical and engineering talent networks."},
-          {h:"Monitor with data", d:"Use live dashboards to track compensation parity and time-to-hire, catching drop-off before it becomes a bottleneck."},
-          {h:"Iterate continuously", d:"Adjust sourcing and interview design based on what the data shows, not assumptions."}
-        ],
-        closing:"This is the same playbook needed to keep specialized offshore engineering roles staffed on schedule, without sacrificing candidate quality or pay competitiveness."
-      }
-    }
-  ],
-  labels:{c:"CONTEXT",a:"ACTION",r:"RESULT",tk:"TRANSFERABLE VALUE",align:"JD ALIGNMENT",fullDetail:"Full story detail",stepDetail:"Full process notes",alignPhase:"Alignment / Kickoff",execPhase:"Execution & Dashboard Tracking",weekAxis:"Quarter Timeline (Weeks)"}
-  },
-  zh: {
-    candidateName: "Vicky Chen 陳薇琪",
-    heroEyebrow: "目標職位 — 波斯卡利斯離岸海事工程台灣分公司 人力資源專員",
-    heroTitle: "跨國、跨部門人資實績的 CAR 案例庫",
-    footer: "本內容彙整自經驗證之專業經歷 · Vicky Chen · 人力資源業務夥伴",
-    metrics: [
-      {val:"7+", lbl:"年人資實務經驗"},
-      {val:"95%+", lbl:"Offer 接受率"},
-      {val:"100%", lbl:"調薪案如期在預算內完成"},
-      {val:"0", lbl:"勞資爭議件數"},
-      {val:"C2", lbl:"英語流利程度"}
-    ],
-    tabs: [
-      {code:"T1", name:"人力資源策略與年度目標"},
-      {code:"T2", name:"績效管理與制度優化"},
-      {code:"T3", name:"教育訓練體系與人才發展"},
-      {code:"T4", name:"薪酬與獎酬制度、工作規則與法遵"},
-      {code:"T5", name:"人才招募"}
-    ],
-    sections: [
-      {
-        code:"T1",
-        title:"人力資源策略與年度目標",
-        chart:{
-          type:"bar",
-          title:"量化成果",
-          metrics:[
-            {label:"交付率提升", value:35},
-            {label:"交付速度提升", value:25},
-            {label:"員工敬業度提升", value:15}
-          ]
-        },
-        stories:[
-          {
-            theme:"將商業戰略轉化為部門級目標",
-            align:"對應職缺 1 — 向組織傳達年度人資戰略",
-            csum:"技術與商務目標脫節",
-            asum:"OKR＋雙週衝刺＋數據模型",
-            rsum:"交付速度 +25%",
-            context:"在 Bitmart 快速擴張期間，技術研發里程碑與商務運營目標逐漸脫節，導致跨團隊執行進度出現落差。",
-            action:"1. Blue Section (Alignment / Kickoff Phase)\nAction: \"Partnered with C-suite leadership to translate annual commercial strategy into team OKRs.\"\nDesign Logic: Focuses W0–W2 on aligning goals and OKRs with senior leadership rather than rushing deliverables.\nHighlight Detail: The commercial team completed alignment in W1—one week ahead of engineering—reflecting standard business operations where leadership must prioritize revenue targets first.\n\n2. Orange Section (Execution & Dashboard Tracking Phase)\nAction: \"Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress.\"\nDesign Logic: Shifts the project into a sustained, stable execution phase from W2 through the end of the quarter (W12).",
-            result:"專案交付速度提升 25%，跨團隊執行一致性顯著改善。",
-            takeaway:"可直接應用於波斯卡利斯的矩陣式組織架構，確保工程里程碑與跨部門商務目標保持一致。",
-            gantt:{
-              title:"OKR 拉齊看板（輕量化儀表板）",
-              rows:[
-                {name:"工程", align:[0,2], exec:[2,12]},
-                {name:"商務", align:[0,1], exec:[1,12]},
-                {name:"產品營運", align:[0,2], exec:[2,11]}
-              ]
-            }
-          },
-          {
-            theme:"統一 200+ 人組織的跨職能 OKR",
-            align:"對應職缺 1 — 維護人資基礎資料並隨編制成長傳達策略",
-            csum:"200+ 人，缺乏統一標準",
-            asum:"統一 OKR＋AI 組織儀表板",
-            rsum:"交付率 +35%，Offer 接受 95%+",
-            context:"擔任 BitMart 資深 HRBP 期間，支援技術、交易與區域營運三大團隊共 200+ 名員工，各職能團隊各自追蹤進度，缺乏統一交付標準。",
-            action:"統一各事業單位的跨職能 OKR，並運用 Claude Code / LLM 打造 AI 組織智能儀表板，即時監控編制、留任率與薪酬對標情況。",
-            result:"整體交付率提升 35%，同時維持 95%+ Offer 接受率並降低自願離職率。",
-            takeaway:"展現為離岸工程管理層提供即時、單一視角人力健康度儀表板的能力，橫跨技術與營運職能。",
-            gantt:{
-              title:"OKR 拉齊看板（輕量化儀表板）",
-              rows:[
-                {name:"技術", align:[0,2], exec:[2,12]},
-                {name:"交易", align:[0,2], exec:[2,12]},
-                {name:"區域營運", align:[1,3], exec:[3,12]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"行動落地流程",
-          intro:"策略下達不是一次性的宣布，而是一套可重複執行的營運節奏。",
-          steps:[
-            {h:"藍色區段", d:"1. Blue Section (Alignment / Kickoff Phase)\nAction: \"Partnered with C-suite leadership to translate annual commercial strategy into team OKRs.\"\nDesign Logic: Focuses W0–W2 on aligning goals and OKRs with senior leadership rather than rushing deliverables.\nHighlight Detail: The commercial team completed alignment in W1—one week ahead of engineering—reflecting standard business operations where leadership must prioritize revenue targets first."},
-            {h:"設計部門級 OKR", d:"將年度目標拆解為可衡量、有明確負責人的部門目標，涵蓋工程、營運與支援職能。"},
-            {h:"橘色區段", d:"2. Orange Section (Execution & Dashboard Tracking Phase)\nAction: \"Ran daily syncs and bi-weekly cross-functional sprints, and built a Gantt chart to track progress.\"\nDesign Logic: Shifts the project into a sustained, stable execution phase from W2 through the end of the quarter (W12)."},
-            {h:"用數據追蹤", d:"建立輕量化儀表板，讓管理層即時掌握進度，而非等到季末才發現落差。"}
-          ],
-          closing:"對波斯卡利斯台灣而言，這代表離岸專案里程碑、船期與商務承諾能被納入同一套營運節奏追蹤，而非各部門各自為政。"
-        }
-      },
-      {
-        code:"T2",
-        title:"績效管理與制度優化",
-        chart:{
-          type:"bar",
-          title:"Measured Impact",
-          metrics:[
-            {label:"On-Time Appraisal Completion", value:100},
-            {label:"Labor Compliance Score", value:95},
-            {label:"Productivity Increase", value:20}
-          ]
-        },
-        stories:[
-          {
-            theme:"Rebuilding Job Grading and Competency Architecture",
-            align:"對應職缺 3 — 設計, 管理並執行績效管理制度",
-            csum:"Subjective reviews across 6 markets",
-            asum:"New competency rubrics + one shared framework",
-            rsum:"Consistent reviews across all 6 markets",
-            context:"Across the Bitmart and Ourbit ecosystem, okr appraisals were subjective and review cycles were fragmented across teams",
-            action:"Designed job level and competency rubrics and standardized performance review frameworks, replacing inconsistent local practices with one common structure.",
-            result:"Delivered consistent, standard framework forming the backbone for merit and promotion decisions.",
-            takeaway:"展現在分散的離岸與陸上工程團隊間統一評核標準的能力。",
-            gantt:{
-              title:"Performance Rollout Board",
-              rows:[
-                {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
-                {name:"Product & Design", align:[0,2], exec:[2,10]},
-                {name:"Operations & Business", align:[0,2], exec:[2,10]}
-              ]
-            }
-          },
-          {
-            theme:"將考核結果連動調薪、PIP 與法遵",
-            align:"對應職缺 3 — 運用考核結果進行調薪, 升遷, 留任或資遣決策",
-            csum:"考核未連動薪酬與行動",
-            asum:"考核結果連動調薪與 PIP",
-            rsum:"法遵 95%+，0 爭議，敬業度 +15%",
-            context:"在 Nano Technology 的工程與科技製造環境中，績效結果未系統性連結薪酬調整或改善措施。",
-            action:"標準化 KPI/OKR 考核流程，將結果直接對接調薪、升遷路徑與績效改善計畫（PIP），同時確保全程符合勞動法規。",
-            result:"維持 95%+ 法規遵循度且 0 件勞資爭議，同時員工敬業度提升 15%、生產力提升 20%。",
-            takeaway:"證明績效制度能在類似離岸工程的技術製造場域中，同時驅動業務成果與零爭議的法規遵循。",
-            gantt:{
-              title:"績效推行看板",
-              rows:[
-                {name:"人資", align:[0,1], exec:[1,12]},
-                {name:"部門主管", align:[1,3], exec:[3,12]},
-                {name:"財務／薪資", align:[2,3], exec:[3,12]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"具說服力的績效制度是一層層建構出來的，不是一夕之間推行完成。",
-          steps:[
-            {h:"診斷現況落差", d:"盤點現行考核作法，找出主觀性與不一致對業務造成的實質成本。"},
-            {h:"重建評核框架", d:"重新設計職級與職能評核標準，讓每個職位都用同一套標準衡量。"},
-            {h:"標準化考核流程", d:"全團隊統一推行同一套 KPI/OKR 考核週期，不因地區而異。"},
-            {h:"結果連動決策", d:"將考核結果直接對接調薪、升遷路徑與 PIP 觸發機制，並從一開始就內建法遵設計。"}
-          ],
-          closing:"一套具說服力且標準化的績效制度，能降低橫跨技術、離岸與陸上職位的組織中發生爭議的風險——這正是波斯卡利斯台灣所需要的能力。"
-        }
-      },
-      {
-        code:"T3",
-        title:"教育訓練體系與人才發展",
-        chart:{
-          type:"doughnut",
-          title:"Measured Impact",
-          metric:{label:"Onboarding Satisfaction", value:90}
-        },
-        stories:[
-          {
-            theme:"Standardized SOP Modules for Technical Ramp-Up",
-            align:"JD 1/3 — Maintain rotations, evaluations, and support workforce readiness",
-            csum:"Long ramp-up, high early error rate",
-            asum:"Standardized technical SOP training modules",
-            rsum:"Faster ramp-up, fewer errors",
-            context:"在 Nano Technology，工程與製造現場的新進技術人員上手週期長，初期現場操作失誤率偏高。",
-            action:"Designed standardized technical SOP training modules, integrated them into structured onboarding tracks, and linked training completion to performance evaluation.",
-            result:"Shortened technical ramp-up time and reduced operational error rates during the early tenure period.",
-            takeaway:"可直接應用於離岸海事工程人員的入職訓練，該場域對初期能力養成與安全合規要求極高。",
-            gantt:{
-              title:"Training Rollout Board",
-              rows:[
-                {name:"Engineering Ops", align:[0,2], exec:[2,8]},
-                {name:"Training Team", align:[0,3], exec:[3,10]},
-                {name:"New Hire Cohort", align:[3,4], exec:[4,12]}
-              ]
-            }
-          },
-          {
-            theme:"Frontline Pulse Checks and Mentor-Based Onboarding",
-            align:"JD 1 — Maintain attendance, evaluations, and employee readiness records",
-            csum:"No early-tenure support system",
-            asum:"Pulse-check surveys + mentor program",
-            rsum:"90%+ onboarding satisfaction",
-            context:"分散式技術團隊缺乏一致的任職初期支持機制，新人在達到完全生產力前有脫離風險。",
-            action:"Deployed frontline pulse-check surveys and a structured mentor program layered onto the SOP training roadmap.",
-            result:"Achieved a 90%+ onboarding satisfaction rate and elevated post-training performance ratings.",
-            takeaway:"為離岸派駐或現場工程人員建立技術信心與留任率的可複製模型。",
-            gantt:{
-              title:"Training Rollout Board",
-              rows:[
-                {name:"HRBP Team", align:[0,1], exec:[1,12]},
-                {name:"Mentors", align:[0,2], exec:[2,12]},
-                {name:"New Hires", align:[2,3], exec:[3,10]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"訓練制度唯有立基於現場實際狀況，才能真正發揮作用。",
-          steps:[
-            {h:"現場觀察診斷", d:"找出新進技術人員在上手階段耗時或出錯的關鍵環節。"},
-            {h:"建立 SOP 訓練庫", d:"將經驗與默會知識轉化為標準化、可重複執行的訓練模組。"},
-            {h:"疊加支持機制", d:"加入導師制與早期脈動調查，讓問題在演變成離職前就被發現。"},
-            {h:"形成閉環改善", d:"將訓練完成度與績效數據連動，讓訓練制度能持續自我優化。"}
-          ],
-          closing:"在離岸海事工程場域中，快速且安全的技術上手不是加分項，而是直接關係到安全與作業就緒度的必要條件。"
-        }
-      },
-      {
-        code:"T4",
-        title:"Compensation, Work Rules & Compliance",
-        chart:{
-          type:"bar",
-          title:"Measured Impact",
-          metrics:[
-            {label:"On-Budget Salary Reviews", value:100},
-            {label:"Statutory Compliance (Zero Penalty)", value:100}
-          ]
-        },
-        stories:[
-          {
-            theme:"Multi-Regional C&B Benchmarking Model",
-            align:"JD 4 — Establish and maintain C&B systems and statutory benefits",
-            csum:"6 markets, diverging labor codes",
-            asum:"Regional pay model + standard payroll SOPs",
-            rsum:"Consistent, audit-ready pay decisions",
-            context:"Operating across 6 international markets at Ourbit & Bitget, statutory labor codes, payroll regulations, and pay competitiveness diverged significantly by jurisdiction.",
-            action:"Built a multi-regional compensation and benefits benchmarking model and standardized payroll and attendance SOPs across markets.",
-            result:"Enabled consistent, defensible pay decisions across all 6 markets while keeping payroll processes audit-ready.",
-            takeaway:"Directly maps to managing C&B and statutory compliance for a multinational offshore workforce operating under Taiwanese and international labor codes.",
-            gantt:{
-              title:"Compliance Cadence Board",
-              rows:[
-                {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
-                {name:"Product & Design", align:[0,2], exec:[2,10]},
-                {name:"Operations & Business", align:[0,2], exec:[2,10]}
-              ]
-            }
-          },
-          {
-            theme:"Zero-Penalty Compliance and On-Budget Salary Reviews",
-            align:"JD 4 — Maintain company work rules, statutory benefits, pensions, and HR reporting",
-            csum:"Overtime & benefits needed constant audit",
-            asum:"Recurring audits + optimized shift scheduling",
-            rsum:"100% on-budget, zero penalties",
-            context:"At Nano Technology's plant operations, working-hour tracking, overtime limits, and statutory benefit administration required continuous audit discipline.",
-            action:"Audited working hours and statutory benefits on a recurring basis, and optimized plant shift scheduling to control unnecessary overtime.",
-            result:"Executed 100% of salary reviews strictly on-budget and maintained a zero-penalty regulatory compliance record.",
-            takeaway:"Demonstrates readiness to manage statutory work-rule compliance and reporting in a regulated, safety-conscious engineering environment.",
-            gantt:{
-              title:"Compliance Cadence Board",
-              rows:[
-                {name:"Payroll", align:[0,1], exec:[1,12]},
-                {name:"Plant Ops", align:[0,2], exec:[2,12]},
-                {name:"Compliance / Legal", align:[1,2], exec:[2,12]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"Compliance is not a checklist run once a year — it is a standing operating cycle.",
-          steps:[
-            {h:"Map the regulations", d:"Catalogue statutory requirements, payroll rules, and benefit obligations across every jurisdiction in scope."},
-            {h:"Build the pay model", d:"Create a C&B structure that stays competitive locally while remaining consistent globally."},
-            {h:"Standardize operations", d:"Roll out common payroll, attendance, and work-rule SOPs so every site runs the same playbook."},
-            {h:"Audit on a cycle", d:"Run recurring compliance checks before regulators do, catching issues while they are still cheap to fix."}
-          ],
-          closing:"This process is what produced a 100% on-budget salary review cycle and a zero-penalty compliance record — the track record Boskalis Taiwan needs for a regulated, safety-first industry."
-        }
-      },
-      {
-        code:"T5",
-        title:"Talent Acquisition & Sourcing",
-        chart:{
-          type:"bar",
-          title:"Measured Impact",
-          metrics:[
-            {label:"Interview Loop Reduction", value:20},
-            {label:"Time-to-Hire Reduction", value:20},
-            {label:"Offer Acceptance Rate", value:95}
-          ],
-          stat:{val:"120+", lbl:"Hires Delivered / Year"}
-        },
-        stories:[
-          {
-            theme:"AI-Driven Sourcing Funnel for High-Volume Technical Hiring",
-            align:"JD 2 — Plan and execute talent acquisition to resolve staffing bottlenecks",
-            csum:"Fast scaling across APAC & Europe",
-            asum:"New JDs + automated sourcing + AI monitoring",
-            rsum:"120+ hires/yr, -20% time-to-hire",
-            context:"At MEXC, technical and operations headcount needed to scale quickly across APAC and Europe under tight timelines.",
-            action:"Overhauled JD architecture, built automated sourcing funnels across technical talent networks, and deployed AI diagnostics to monitor regional compensation parity.",
-            result:"Delivered 120+ hires annually, shortened interview loops by 20%, cut engineering time-to-hire by 20%, and sustained a 95%+ offer acceptance rate.",
-            takeaway:"A directly applicable playbook for resolving technical and engineering staffing bottlenecks in an offshore project environment.",
-            gantt:{
-              title:"Hiring Funnel Board",
-              rows:[
-                {name:"Talent Sourcing", align:[0,1], exec:[1,12]},
-                {name:"Hiring Mgrs — APAC", align:[1,2], exec:[2,11]},
-                {name:"Hiring Mgrs — Europe", align:[2,3], exec:[3,12]}
-              ]
-            }
-          },
-          {
-            theme:"AI Org Intelligence for Headcount and Comp Parity",
-            align:"JD 2 — Selection, hiring, and headcount planning",
-            csum:"No real-time visibility into headcount gaps",
-            asum:"AI dashboards for headcount & pay parity",
-            rsum:"95%+ offer accept, lower turnover",
-            context:"At BitMart, recruiting leadership lacked real-time visibility into headcount gaps and compensation parity across Tech, Trading, and Regional Operations.",
-            action:"Architected AI-powered org intelligence dashboards (Claude Code/LLM-based) surfacing live headcount, retention, and comp parity signals to guide sourcing priorities.",
-            result:"Sustained 95%+ offer acceptance and reduced voluntary turnover by aligning sourcing effort with the highest-risk gaps.",
-            takeaway:"Shows how data-driven recruiting infrastructure can keep offshore project staffing proactive rather than reactive.",
-            gantt:{
-              title:"Hiring Funnel Board",
-              rows:[
-                {name:"Recruiting", align:[0,1], exec:[1,12]},
-                {name:"Tech", align:[1,2], exec:[2,12]},
-                {name:"Trading", align:[1,3], exec:[3,12]}
-              ]
-            }
-          }
-        ],
-        narrative:{
-          title:"How the Process Works",
-          intro:"Hitting hiring targets on a technical role is a pipeline problem before it is an interviewing problem.",
-          steps:[
-            {h:"Rebuild the JD", d:"Rewrite job descriptions around the real technical and operational requirements of the role, not generic templates."},
-            {h:"Build the funnel", d:"Stand up automated sourcing channels into technical and engineering talent networks."},
-            {h:"Monitor with data", d:"Use live dashboards to track compensation parity and time-to-hire, catching drop-off before it becomes a bottleneck."},
-            {h:"Iterate continuously", d:"Adjust sourcing and interview design based on what the data shows, not assumptions."}
-          ],
-          closing:"This is the same playbook needed to keep specialized offshore engineering roles staffed on schedule, without sacrificing candidate quality or pay competitiveness."
-        }
-      }
-    ],
-    labels:{c:"CONTEXT",a:"ACTION",r:"RESULT",tk:"TRANSFERABLE VALUE",align:"JD ALIGNMENT",fullDetail:"Full story detail",stepDetail:"Full process notes",alignPhase:"Alignment / Kickoff",execPhase:"Execution & Dashboard Tracking",weekAxis:"Quarter Timeline (Weeks)"}
-  }
-};
-
-let currentLang = 'en';
-let currentTab = 'T1';
-let chartInstance = null;
-
-function renderMetrics(){
-  const d = DATA[currentLang];
-  document.getElementById('metrics').innerHTML = d.metrics.map(m => `
-    <div class="metric-cell">
-      <div class="val mono">${m.val}</div>
-      <div class="lbl">${m.lbl}</div>
-    </div>`).join('');
-}
-
-function renderTabs(){
-  const d = DATA[currentLang];
-  document.getElementById('tabbar').innerHTML = d.tabs.map(t => `
-    <button class="tab ${t.code===currentTab?'active':''}" onclick="setTab('${t.code}')">
-      <span class="tcode mono">${t.code}</span>
-      <span class="tname">${t.name}</span>
-    </button>`).join('');
-}
-
-function renderMain(){
-  const d = DATA[currentLang];
-  const section = d.sections.find(s => s.code === currentTab);
-  const L = d.labels;
-  const langAttr = currentLang === 'zh' ? ' lang-zh' : '';
-
-  document.getElementById('main').innerHTML = `
-    <div class="section-head${langAttr}">
-      <div class="tcode mono">${section.code}</div>
-      <h2>${section.title}</h2>
+            <!-- 時間軸刻度 -->
+            <div></div>
+            <div class="axis">
+                <span>W0</span>
+                <span>W2</span>
+                <span>W4</span>
+                <span>W6</span>
+                <span>W8</span>
+                <span>W10</span>
+                <span>W12</span>
+            </div>
+        </div>
     </div>
-    ${section.chart ? `
-      <div class="chart-panel${langAttr}">
-        <div>
-          <h4>${section.chart.title}</h4>
-          <div class="chart-body">
-            <div class="chart-canvas-wrap${section.chart.type==='doughnut' ? ' doughnut-wrap' : ''}">
-              <canvas id="tabChart"></canvas>
-              ${section.chart.type==='doughnut' ? `
-                <div class="doughnut-center">
-                  <span class="val mono">${section.chart.metric.value}%</span>
-                  <span class="lbl">${section.chart.metric.label}</span>
-                </div>` : ''}
-            </div>
-          </div>
-        </div>
-        ${section.chart.stat ? `
-          <div class="chart-stat">
-            <div class="val mono">${section.chart.stat.val}</div>
-            <div class="lbl">${section.chart.stat.lbl}</div>
-          </div>
-        ` : ''}
-      </div>
-    ` : ''}
-    ${section.stories.map((s, sIdx) => `
-      <div class="card${langAttr}">
-        <div class="card-head">
-          <h3>${s.theme}</h3>
-          <div class="align-tag"><span class="k">${L.align}</span> — ${s.align.replace(/^JD\s*\d+\s*—\s*/,'').replace(/^對應職缺\s*\d+\s*—\s*/,'')}</div>
-        </div>
-        <div class="car-flow">
-          <div class="flow-node">
-            <div class="fn-icon">${ICON.c}</div>
-            <div class="fn-text">${s.csum}</div>
-          </div>
-          <div class="flow-arrow">${ICON.arrow}</div>
-          <div class="flow-node">
-            <div class="fn-icon amber">${ICON.a}</div>
-            <div class="fn-text">${s.asum}</div>
-          </div>
-          <div class="flow-arrow">${ICON.arrow}</div>
-          <div class="flow-node">
-            <div class="fn-icon result">${ICON.r}</div>
-            <div class="fn-text strong">${s.rsum}</div>
-          </div>
-        </div>
-        <div class="takeaway"><span class="icon">${ICON.star}</span><span>${s.takeaway}</span></div>
-        ${s.gantt ? `
-          <div class="gantt-panel${langAttr}">
-            <div class="gtitle">${s.gantt.title}</div>
-            <div class="gantt-legend">
-              <span><i class="dot" style="background:#1B4965"></i>${L.alignPhase}</span>
-              <span><i class="dot" style="background:#E8963A"></i>${L.execPhase}</span>
-            </div>
-            <div class="gantt-canvas-wrap" style="height:${s.gantt.rows.length * 34 + 34}px">
-              <canvas id="gantt-${sIdx}"></canvas>
-            </div>
-          </div>
-        ` : ''}
-        <details class="fulltext">
-          <summary>${L.fullDetail}</summary>
-          <div class="ft-grid">
-            <div><span class="clabel">${L.c}</span><p>${s.context}</p></div>
-            <div><span class="clabel">${L.a}</span><p>${s.action}</p></div>
-            <div><span class="clabel">${L.r}</span><p>${s.result}</p></div>
-          </div>
-        </details>
-      </div>
-    `).join('')}
-    ${section.narrative ? `
-      <div class="narrative${langAttr}">
-        <h4>${section.narrative.title}</h4>
-        <div class="nintro">${section.narrative.intro}</div>
-        <div class="stepper">
-          ${section.narrative.steps.map((st,i) => `
-            <div class="step-node">
-              <div class="step-circle mono">${i+1}</div>
-              <div class="step-title">${st.h}</div>
-            </div>
-            ${i < section.narrative.steps.length-1 ? '<div class="step-line"></div>' : ''}
-          `).join('')}
-        </div>
-        <details class="fulltext">
-          <summary>${L.stepDetail}</summary>
-          <div class="step-details-grid">
-            ${section.narrative.steps.map(st => `<div><h5>${st.h}</h5><p>${st.d}</p></div>`).join('')}
-          </div>
-        </details>
-        <div class="narrow">${section.narrative.closing}</div>
-      </div>
-    ` : ''}
-  `;
 
-  renderChartJS(section);
-  renderGanttCharts(section);
-}
-
-let ganttInstances = [];
-function renderGanttCharts(section){
-  if(typeof Chart === 'undefined') return;
-  ganttInstances.forEach(c => c.destroy());
-  ganttInstances = [];
-  const L = DATA[currentLang].labels;
-  section.stories.forEach((s, sIdx) => {
-    if(!s.gantt) return;
-    const canvas = document.getElementById('gantt-' + sIdx);
-    if(!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const navy = '#0B2A3D', steel = '#1B4965', amber = '#E8963A', line = '#D6DCDE', mute = '#5B6E76';
-    const rows = s.gantt.rows;
-    const inst = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: rows.map(r => r.name),
-        datasets: [
-          {
-            label: L.alignPhase,
-            data: rows.map(r => r.align),
-            backgroundColor: steel,
-            borderRadius: 2,
-            barPercentage: 0.55,
-            categoryPercentage: 0.7
-          },
-          {
-            label: L.execPhase,
-            data: rows.map(r => r.exec),
-            backgroundColor: amber,
-            borderRadius: 2,
-            barPercentage: 0.55,
-            categoryPercentage: 0.7
-        }
-        ]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: navy,
-          callbacks: {
-            label: (c) => ' ' + c.dataset.label + ': W' + c.raw[0] + '–W' + c.raw[1]
-          }
-        }
-      },
-      scales: {
-        x: {
-          min: 0, max: 12,
-          ticks: { color: mute, font: { family: 'IBM Plex Mono', size: 10 }, stepSize: 2, callback: (v) => 'W' + v },
-          grid: { color: line },
-          title: { display: true, text: L.weekAxis, color: mute, font: { family: 'IBM Plex Mono', size: 10 } }
-        },
-        y: {
-          ticks: { color: navy, font: { family: 'Inter', size: 11.5, weight: '500' } },
-          grid: { display: false }
-        }
-      }
-    }
-  });
-  ganttInstances.push(inst);
-  });
-}
-
-function renderChartJS(section){
-  if(typeof Chart === 'undefined'){
-    const wrap = document.querySelector('.chart-canvas-wrap');
-    if(wrap) wrap.insertAdjacentHTML('beforeend', '<div style="font-size:12px;color:#5B6E76;padding:10px 0;">Chart library failed to load — check network access.</div>');
-    return;
-  }
-  if(chartInstance){ chartInstance.destroy(); chartInstance = null; }
-  if(!section.chart) return;
-  const canvas = document.getElementById('tabChart');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const navy = '#0B2A3D', steel = '#1B4965', amber = '#E8963A', line = '#D6DCDE', mute = '#5B6E76';
-
-  if(section.chart.type === 'bar'){
-    const m = section.chart.metrics;
-    chartInstance = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: m.map(x => x.label),
-        datasets: [{
-          data: m.map(x => x.value),
-          backgroundColor: m.map((_, i) => i % 2 === 0 ? steel : amber),
-          borderRadius: 2,
-          maxBarThickness: 52
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: navy,
-            callbacks: { label: (c) => ' ' + c.parsed.y + '%' }
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 100,
-            ticks: { color: mute, font: { family: 'IBM Plex Mono', size: 11 }, callback: (v) => v + '%' },
-            grid: { color: line }
-          },
-          x: {
-            ticks: { color: navy, font: { family: 'Inter', size: 12, weight: '500' } },
-            grid: { display: false }
-          }
-        }
-      }
-    });
-  } else if(section.chart.type === 'doughnut'){
-    const v = section.chart.metric.value;
-    chartInstance = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: [section.chart.metric.label, ''],
-        datasets: [{
-          data: [v, 100 - v],
-          backgroundColor: [amber, line],
-          borderWidth: 0
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '72%',
-        plugins: {
-          legend: { display: false },
-          tooltip: { enabled: false }
-        }
-      }
-    });
-  }
-}
-
-function renderStatic(){
-  const d = DATA[currentLang];
-  document.querySelector('[data-i18n="candidateName"]').textContent = d.candidateName;
-  document.querySelector('[data-i18n="heroEyebrow"]').textContent = d.heroEyebrow;
-  document.querySelector('[data-i18n="heroTitle"]').textContent = d.heroTitle;
-  document.querySelector('[data-i18n="footer"]').textContent = d.footer;
-  document.body.setAttribute('lang', currentLang === 'zh' ? 'zh-Hant' : 'en');
-}
-
-function setLang(lang){
-  currentLang = lang;
-  document.getElementById('btn-en').classList.toggle('active', lang==='en');
-  document.getElementById('btn-zh').classList.toggle('active', lang==='zh');
-  renderStatic();
-  renderMetrics();
-  renderTabs();
-  renderMain();
-}
-
-function setTab(code){
-  currentTab = code;
-  renderTabs();
-  renderMain();
-}
-
-renderStatic();
-renderMetrics();
-renderTabs();
-renderMain();
-</script>
 </body>
 </html>
