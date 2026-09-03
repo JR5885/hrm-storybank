@@ -466,8 +466,8 @@ const DATA = {
               title:"Performance Rollout Board",
               rows:[
                 {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
-                {name:"Product & Design", align:[1,3], exec:[3,11]},
-                {name:"Operations & Business", align:[2,4], exec:[4,12]}
+                {name:"Product & Design", align:[0,2], exec:[2,10]},
+                {name:"Operations & Business", align:[0,2], exec:[2,10]}
               ]
             }
           },
@@ -490,66 +490,66 @@ const DATA = {
               ]
             }
           }
-      ],
-      narrative:{
-        title:"How the Process Works",
-        intro:"A defensible performance system is built in layers, not rolled out overnight.",
-        steps:[
-          {h:"Diagnose the gap", d:"Audit existing appraisal practices to find where subjectivity or inconsistency is costing the business."},
-          {h:"Rebuild the framework", d:"Redesign job grading and competency rubrics so every role is evaluated against the same standard."},
-          {h:"Standardize the workflow", d:"Roll out one KPI/OKR evaluation cycle across all teams, regardless of location."},
-          {h:"Connect results to decisions", d:"Wire ratings directly into merit increases, promotion tracks, and PIP triggers, with compliance built in from the start."}
         ],
-        closing:"A defensible, standardized performance system reduces the risk of disputes in a workforce that mixes technical, offshore, and onshore roles — exactly the profile Boskalis Taiwan needs to manage."
-      }
-    },
-    {
-      code:"T3",
-      title:"Training Systems & Talent Development",
-      chart:{
-        type:"doughnut",
-        title:"Measured Impact",
-        metric:{label:"Onboarding Satisfaction", value:90}
-      },
-      stories:[
-        {
-          theme:"Standardized SOP Modules for Technical Ramp-Up",
-          align:"JD 1/3 — Maintain rotations, evaluations, and support workforce readiness",
-          csum:"Long ramp-up, high early error rate",
-          asum:"Standardized technical SOP training modules",
-          rsum:"Faster ramp-up, fewer errors",
-          context:"At Nano Technology, new technical hires in engineering and manufacturing operations faced long ramp-up periods and elevated early error rates on the floor.",
-          action:"Designed standardized technical SOP training modules, integrated them into structured onboarding tracks, and linked training completion to performance evaluation.",
-          result:"Shortened technical ramp-up time and reduced operational error rates during the early tenure period.",
-          takeaway:"Directly applicable to onboarding offshore marine engineering personnel, where early competency and safety compliance are critical.",
-          gantt:{
-            title:"Training Rollout Board",
-            rows:[
-              {name:"Engineering Ops", align:[0,2], exec:[2,8]},
-              {name:"Training Team", align:[0,3], exec:[3,10]},
-              {name:"New Hire Cohort", align:[3,4], exec:[4,12]}
-            ]
-          }
-        },
-        {
-          theme:"Frontline Pulse Checks and Mentor-Based Onboarding",
-          align:"JD 1 — Maintain attendance, evaluations, and employee readiness records",
-          csum:"No early-tenure support system",
-          asum:"Pulse-check surveys + mentor program",
-          rsum:"90%+ onboarding satisfaction",
-          context:"Distributed technical teams lacked a consistent early-tenure support mechanism, risking disengagement before new hires reached full productivity.",
-          action:"Deployed frontline pulse-check surveys and a structured mentor program layered onto the SOP training roadmap.",
-          result:"Achieved a 90%+ onboarding satisfaction rate and elevated post-training performance ratings.",
-          takeaway:"A repeatable model for building technical confidence and retention among offshore-deployed or field-based engineering staff.",
-          gantt:{
-            title:"Training Rollout Board",
-            rows:[
-              {name:"HRBP Team", align:[0,1], exec:[1,12]},
-              {name:"Mentors", align:[0,2], exec:[2,12]},
-              {name:"New Hires", align:[2,3], exec:[3,10]}
-            ]
-          }
+        narrative:{
+          title:"How the Process Works",
+          intro:"A defensible performance system is built in layers, not rolled out overnight.",
+          steps:[
+            {h:"Diagnose the gap", d:"Audit existing appraisal practices to find where subjectivity or inconsistency is costing the business."},
+            {h:"Rebuild the framework", d:"Redesign job grading and competency rubrics so every role is evaluated against the same standard."},
+            {h:"Standardize the workflow", d:"Roll out one KPI/OKR evaluation cycle across all teams, regardless of location."},
+            {h:"Connect results to decisions", d:"Wire ratings directly into merit increases, promotion tracks, and PIP triggers, with compliance built in from the start."}
+          ],
+          closing:"A defensible, standardized performance system reduces the risk of disputes in a workforce that mixes technical, offshore, and onshore roles — exactly the profile Boskalis Taiwan needs to manage."
         }
+      },
+      {
+        code:"T3",
+        title:"Training Systems & Talent Development",
+        chart:{
+          type:"doughnut",
+          title:"Measured Impact",
+          metric:{label:"Onboarding Satisfaction", value:90}
+        },
+        stories:[
+          {
+            theme:"Standardized SOP Modules for Technical Ramp-Up",
+            align:"JD 1/3 — Maintain rotations, evaluations, and support workforce readiness",
+            csum:"Long ramp-up, high early error rate",
+            asum:"Standardized technical SOP training modules",
+            rsum:"Faster ramp-up, fewer errors",
+            context:"At Nano Technology, new technical hires in engineering and manufacturing operations faced long ramp-up periods and elevated early error rates on the floor.",
+            action:"Designed standardized technical SOP training modules, integrated them into structured onboarding tracks, and linked training completion to performance evaluation.",
+            result:"Shortened technical ramp-up time and reduced operational error rates during the early tenure period.",
+            takeaway:"Directly applicable to onboarding offshore marine engineering personnel, where early competency and safety compliance are critical.",
+            gantt:{
+              title:"Training Rollout Board",
+              rows:[
+                {name:"Engineering Ops", align:[0,2], exec:[2,8]},
+                {name:"Training Team", align:[0,3], exec:[3,10]},
+                {name:"New Hire Cohort", align:[3,4], exec:[4,12]}
+              ]
+            }
+          },
+          {
+            theme:"Frontline Pulse Checks and Mentor-Based Onboarding",
+            align:"JD 1 — Maintain attendance, evaluations, and employee readiness records",
+            csum:"No early-tenure support system",
+            asum:"Pulse-check surveys + mentor program",
+            rsum:"90%+ onboarding satisfaction",
+            context:"Distributed technical teams lacked a consistent early-tenure support mechanism, risking disengagement before new hires reached full productivity.",
+            action:"Deployed frontline pulse-check surveys and a structured mentor program layered onto the SOP training roadmap.",
+            result:"Achieved a 90%+ onboarding satisfaction rate and elevated post-training performance ratings.",
+            takeaway:"A repeatable model for building technical confidence and retention among offshore-deployed or field-based engineering staff.",
+            gantt:{
+              title:"Training Rollout Board",
+              rows:[
+                {name:"HRBP Team", align:[0,1], exec:[1,12]},
+                {name:"Mentors", align:[0,2], exec:[2,12]},
+                {name:"New Hires", align:[2,3], exec:[3,10]}
+              ]
+            }
+          }
       ],
       narrative:{
         title:"How the Process Works",
@@ -589,8 +589,8 @@ const DATA = {
             title:"Compliance Cadence Board",
             rows:[
               {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
-              {name:"Product & Design", align:[1,3], exec:[3,11]},
-              {name:"Operations & Business", align:[2,4], exec:[4,12]}
+              {name:"Product & Design", align:[0,2], exec:[2,10]},
+              {name:"Operations & Business", align:[0,2], exec:[2,10]}
             ]
           }
         },
@@ -697,7 +697,7 @@ const DATA = {
   zh: {
     candidateName: "Vicky Chen 陳薇琪",
     heroEyebrow: "目標職位 — 波斯卡利斯離岸海事工程台灣分公司 人力資源專員",
-    heroTitle: "跨國, 跨部門人資實績的 CAR 案例庫",
+    heroTitle: "跨國、跨部門人資實績的 CAR 案例庫",
     footer: "本內容彙整自經驗證之專業經歷 · Vicky Chen · 人力資源業務夥伴",
     metrics: [
       {val:"7+", lbl:"年人資實務經驗"},
@@ -800,13 +800,13 @@ const DATA = {
             context:"Across the Bitmart and Ourbit ecosystem, okr appraisals were subjective and review cycles were fragmented across teams",
             action:"Designed job level and competency rubrics and standardized performance review frameworks, replacing inconsistent local practices with one common structure.",
             result:"Delivered consistent, standard framework forming the backbone for merit and promotion decisions.",
-            takeaway:"展現在分散的離岸與陸上工程團隊間統一評核標準的能力.",
+            takeaway:"展現在分散的離岸與陸上工程團隊間統一評核標準的能力。",
             gantt:{
               title:"Performance Rollout Board",
               rows:[
                 {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
-                {name:"Product & Design", align:[1,3], exec:[3,11]},
-                {name:"Operations & Business", align:[2,4], exec:[4,12]}
+                {name:"Product & Design", align:[0,2], exec:[2,10]},
+                {name:"Operations & Business", align:[0,2], exec:[2,10]}
               ]
             }
           },
@@ -832,14 +832,14 @@ const DATA = {
         ],
         narrative:{
           title:"How the Process Works",
-          intro:"A defensible performance system is built in layers, not rolled out overnight.",
+          intro:"具說服力的績效制度是一層層建構出來的，不是一夕之間推行完成。",
           steps:[
-            {h:"Diagnose the gap", d:"Audit existing appraisal practices to find where subjectivity or inconsistency is costing the business."},
-            {h:"Rebuild the framework", d:"Redesign job grading and competency rubrics so every role is evaluated against the same standard."},
-            {h:"Standardize the workflow", d:"Roll out one KPI/OKR evaluation cycle across all teams, regardless of location."},
-            {h:"Connect results to decisions", d:"Wire ratings directly into merit increases, promotion tracks, and PIP triggers, with compliance built in from the start."}
+            {h:"診斷現況落差", d:"盤點現行考核作法，找出主觀性與不一致對業務造成的實質成本。"},
+            {h:"重建評核框架", d:"重新設計職級與職能評核標準，讓每個職位都用同一套標準衡量。"},
+            {h:"標準化考核流程", d:"全團隊統一推行同一套 KPI/OKR 考核週期，不因地區而異。"},
+            {h:"結果連動決策", d:"將考核結果直接對接調薪、升遷路徑與 PIP 觸發機制，並從一開始就內建法遵設計。"}
           ],
-          closing:"A defensible, standardized performance system reduces the risk of disputes in a workforce that mixes technical, offshore, and onshore roles — exactly the profile Boskalis Taiwan needs to manage."
+          closing:"一套具說服力且標準化的績效制度，能降低橫跨技術、離岸與陸上職位的組織中發生爭議的風險——這正是波斯卡利斯台灣所需要的能力。"
         }
       },
       {
@@ -892,12 +892,12 @@ const DATA = {
         ],
         narrative:{
           title:"How the Process Works",
-          intro:"Training systems only work when they are built from what actually happens on the floor.",
+          intro:"訓練制度唯有立基於現場實際狀況，才能真正發揮作用。",
           steps:[
-            {h:"Observe the floor", d:"Identify where new technical hires lose time or make errors during ramp-up."},
-            {h:"Build the SOP library", d:"Convert tribal knowledge into standardized, repeatable training modules."},
-            {h:"Layer in support", d:"Add mentor assignments and early pulse-check surveys so gaps surface before they become attrition."},
-            {h:"Close the loop", d:"Tie training completion to performance data, so the training program keeps improving itself."}
+            {h:"現場觀察診斷", d:"找出新進技術人員在上手階段耗時或出錯的關鍵環節。"},
+            {h:"建立 SOP 訓練庫", d:"將經驗與默會知識轉化為標準化、可重複執行的訓練模組。"},
+            {h:"疊加支持機制", d:"加入導師制與早期脈動調查，讓問題在演變成離職前就被發現。"},
+            {h:"形成閉環改善", d:"將訓練完成度與績效數據連動，讓訓練制度能持續自我優化。"}
           ],
           closing:"在離岸海事工程場域中，快速且安全的技術上手不是加分項，而是直接關係到安全與作業就緒度的必要條件。"
         }
@@ -928,8 +928,8 @@ const DATA = {
               title:"Compliance Cadence Board",
               rows:[
                 {name:"Tech / Engineering", align:[0,2], exec:[2,10]},
-                {name:"Product & Design", align:[1,3], exec:[3,11]},
-                {name:"Operations & Business", align:[2,4], exec:[4,12]}
+                {name:"Product & Design", align:[0,2], exec:[2,10]},
+                {name:"Operations & Business", align:[0,2], exec:[2,10]}
               ]
             }
           },
@@ -1197,7 +1197,7 @@ function renderGanttCharts(section){
             borderRadius: 2,
             barPercentage: 0.55,
             categoryPercentage: 0.7
-          }
+        }
         ]
     },
     options: {
