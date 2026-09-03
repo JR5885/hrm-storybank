@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)file:///C:/Users/User/Downloads/nano_tech_org_chart.html -->
 <html lang="zh-Hant"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Nano Tech 奈米科技化工廠 組織與工安架構圖</title>
@@ -166,10 +165,6 @@
   .tree .pod-line{color:var(--text);}
   .tree .pod-line .cnt{color:var(--accent);font-weight:600;}
   .tree .goal{display:block;color:var(--sub);font-size:12px;line-height:1.7;padding:2px 0 6px 18px;}
-  .tree .badge{
-    display:inline-block;font-size:10px;background:var(--accent);color:#0b0f17;
-    padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:700;vertical-align:middle;
-  }
 
   .matrix-wrap{width:100%;max-width:1180px;}
   .matrix-title{font-size:16px;font-weight:700;margin-bottom:6px;}
@@ -259,42 +254,6 @@
   .section-sub{font-size:12.5px;color:var(--sub);line-height:1.8;margin-bottom:18px;}
   .subhead{font-size:13.5px;font-weight:700;margin:22px 0 10px;color:var(--text);}
 
-  .flow-row{
-    display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
-    gap:0;background:var(--card);border:1px solid var(--card-border);
-    border-radius:10px;padding:18px 16px;margin-bottom:8px;
-  }
-  .flow-step{
-    font-size:12.5px;font-weight:700;text-align:center;padding:10px 16px;
-    border-radius:8px;background:#101724;border:1px solid var(--card-border);
-    min-width:150px;
-  }
-  .flow-arrow{color:var(--sub);font-size:16px;padding:0 10px;}
-
-  .rating-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
-  .rating-pill{
-    display:flex;align-items:center;gap:8px;background:var(--card);
-    border:1px solid var(--card-border);border-radius:8px;padding:10px 14px;flex:1;min-width:200px;
-  }
-  .rating-pill .letter{
-    width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    font-weight:700;font-size:12.5px;color:#0b0f17;flex-shrink:0;
-  }
-  .rating-pill .txt{font-size:12px;color:var(--sub);line-height:1.6;}
-  .rating-pill .txt b{color:var(--text);}
-  .letter.s{background:#f0c93c;}
-  .letter.ab{background:#3ec9a7;}
-  .letter.cd{background:#ef5b5b;}
-
-  .weight-row{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;}
-  .weight-card{
-    flex:1;min-width:260px;background:var(--card);border:1px solid var(--card-border);
-    border-radius:10px;padding:14px 16px;
-  }
-  .weight-card .wtitle{font-size:13px;font-weight:700;margin-bottom:6px;}
-  .weight-card .wtitle .pct{color:var(--c1);margin-left:4px;}
-  .weight-card ul{margin:8px 0 0;padding-left:18px;font-size:12px;color:var(--sub);line-height:1.7;}
-
   .sop-steps{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;}
   .sop-step{
     flex:1;min-width:260px;background:var(--card);border:1px solid var(--card-border);
@@ -310,14 +269,14 @@
 </head>
 <body>
 
-  <h1>Nano Tech 奈米科技化工廠 組織與工安架構圖</h1>
-  <div class="subtitle">300 人廠區編組 ・ 強力落實化工廠工安、證照回訓與標準作業流程</div>
+  <h1>Nano Tech 奈米科技化工廠 組織與工安管理架構圖</h1>
+  <div class="subtitle">300 人廠區編組 ・ 嚴格落實工安第一、證照回訓與師徒培訓機制</div>
 
   <div class="tabs">
     <button class="tab-btn active" onclick="showTab('chart', this)">🗂 組織樹狀圖</button>
     <button class="tab-btn" onclick="showTab('list', this)">📋 條列大綱</button>
-    <button class="tab-btn" onclick="showTab('matrix', this)">🎯 目標管理矩陣 (BitMart)</button>
-    <button class="tab-btn" onclick="showTab('matrix2', this)">⚡ 廠區工安矩陣 (Nano Tech)</button>
+    <button class="tab-btn" onclick="showTab('matrix', this)">🎯 廠區目標對齊矩陣 (BitMart)</button>
+    <button class="tab-btn" onclick="showTab('matrix2', this)">⚡ 工安與培訓矩陣 (Nano Tech)</button>
     <button class="tab-btn" onclick="showTab('compare', this)">🆚 管理模式差異對比</button>
     <button class="tab-btn" onclick="showTab('health', this)">📊 廠區工安與健康度評分</button>
     <button class="tab-btn" onclick="showTab('promo', this)">🚀 考核、培訓與工安懲戒機制</button>
@@ -340,15 +299,15 @@
       </div>
       <div class="pods">
         <div class="pod">
-          <span class="pod-name">反應與合成組</span><span class="pod-count">25人</span>
+          <span class="pod-name">反應與合成班組</span><span class="pod-count">25人</span>
           <div class="pod-goal">在十座上重視工安意識，確實配戴正確 PPE，確保化學反應操作安全與零洩漏。</div>
         </div>
         <div class="pod">
-          <span class="pod-name">精餾與純化組</span><span class="pod-count">20人</span>
+          <span class="pod-name">精餾與純化班組</span><span class="pod-count">20人</span>
           <div class="pod-goal">嚴格執行標準操作安全，落實設備巡檢與異常通報。</div>
         </div>
         <div class="pod">
-          <span class="pod-name">包裝與充填組</span><span class="pod-count">20人</span>
+          <span class="pod-name">包裝與充填班組</span><span class="pod-count">20人</span>
           <div class="pod-goal">落實危險品搬運與防護規範，確保作業現場安全無虞。</div>
         </div>
       </div>
@@ -361,12 +320,12 @@
       </div>
       <div class="pods">
         <div class="pod">
-          <span class="pod-name">工安環保組</span><span class="pod-count">35人</span>
+          <span class="pod-name">工安環保與宣導組</span><span class="pod-count">35人</span>
           <div class="pod-goal">定期辦理場內演練、安全海報宣導與公安意識推廣。</div>
         </div>
         <div class="pod">
           <span class="pod-name">證照回訓審核組</span><span class="pod-count">25人</span><span class="badge">工安重點</span>
-          <div class="pod-goal">依法要求員工進行證照回訓與專業資格審查，確保全廠合法合規。</div>
+          <div class="pod-goal">HR 與工安單位嚴格要求專業證照回訓與資格審查，確保全廠合法合規。</div>
         </div>
         <div class="pod">
           <span class="pod-name">品質檢驗組</span><span class="pod-count">15人</span>
@@ -383,11 +342,11 @@
       <div class="pods">
         <div class="pod">
           <span class="pod-name">新人培訓與導師組</span><span class="pod-count">30人</span><span class="badge">手把手培訓</span>
-          <div class="pod-goal">新人經由資深導師 3 個月手把手培訓，並在十座上嚴格建立工安意識。</div>
+          <div class="pod-goal">新人經由導師 3 個月手把手培訓，並在十座上重視工安意識。</div>
         </div>
         <div class="pod">
-          <span class="pod-name">公安激勵與福委組</span><span class="pod-count">35人</span>
-          <div class="pod-goal">不定期抽查廠區作業，對公安表現良好者給予公開獎勵。</div>
+          <span class="pod-name">公安激勵與稽核組</span><span class="pod-count">35人</span>
+          <div class="pod-goal">不定期抽查廠區作業，對公安良好行為給予公開獎勵。</div>
         </div>
         <div class="pod">
           <span class="pod-name">勞安紀律與考核組</span><span class="pod-count">25人</span>
@@ -437,24 +396,24 @@
 
       <div class="dept-line c1" style="color:var(--c1);">1. 生產製造與製程部門 — <span class="cnt">共 65 人</span></div>
       <ul style="--accent:var(--c1);">
-        <li class="pod-line">├── 反應與合成組 <span class="cnt">| 25 人</span>
+        <li class="pod-line">├── 反應與合成班組 <span class="cnt">| 25 人</span>
           <span class="goal">目標：在十座上重視工安意識，確實配戴正確 PPE，確保化學反應操作安全與零洩漏。</span>
         </li>
-        <li class="pod-line">├── 精餾與純化組 <span class="cnt">| 20 人</span>
+        <li class="pod-line">├── 精餾與純化班組 <span class="cnt">| 20 人</span>
           <span class="goal">目標：嚴格執行標準操作安全，落實設備巡檢與異常通報。</span>
         </li>
-        <li class="pod-line">└── 包裝與充填組 <span class="cnt">| 20 人</span>
+        <li class="pod-line">└── 包裝與充填班組 <span class="cnt">| 20 人</span>
           <span class="goal">目標：落實危險品搬運與防護規範，確保作業現場安全無虞。</span>
         </li>
       </ul>
 
       <div class="dept-line" style="color:var(--c2);">2. 品保與工安環保部門 — <span class="cnt">共 75 人</span></div>
       <ul style="--accent:var(--c2);">
-        <li class="pod-line">├── 工安環保組 <span class="cnt">| 35 人</span>
+        <li class="pod-line">├── 工安環保與宣導組 <span class="cnt">| 35 人</span>
           <span class="goal">目標：定期辦理場內演練、安全海報宣導與公安意識推廣。</span>
         </li>
         <li class="pod-line">├── 證照回訓審核組 <span class="cnt">| 25 人</span><span class="badge" style="background:var(--c2);color:#0b0f17;">工安重點</span>
-          <span class="goal">目標：依法要求員工進行證照回訓與專業資格審查，確保全廠合法合規。</span>
+          <span class="goal">目標：HR 與工安單位嚴格要求專業證照回訓與資格審查，確保全廠合法合規。</span>
         </li>
         <li class="pod-line">└── 品質檢驗組 <span class="cnt">| 15 人</span>
           <span class="goal">目標：把關原物料與化學品品質，維護實驗室安全環境。</span>
@@ -464,10 +423,10 @@
       <div class="dept-line" style="color:var(--c3);">3. 人資與勞安紀律部門 — <span class="cnt">共 110 人</span></div>
       <ul style="--accent:var(--c3);">
         <li class="pod-line">├── 新人培訓與導師組 <span class="cnt">| 30 人</span>
-          <span class="goal">目標：新人經由資深導師 3 個月手把手培訓，並在十座上嚴格建立工安意識。</span>
+          <span class="goal">目標：新人經由導師 3 個月手把手培訓，並在十座上重視工安意識。</span>
         </li>
-        <li class="pod-line">├── 公安激勵與福委組 <span class="cnt">| 35 人</span>
-          <span class="goal">目標：不定期抽查廠區作業，對公安表現良好者給予公開獎勵。</span>
+        <li class="pod-line">├── 公安激勵與稽核組 <span class="cnt">| 35 人</span>
+          <span class="goal">目標：不定期抽查廠區作業，對公安良好行為給予公開獎勵。</span>
         </li>
         <li class="pod-line">├── 勞安紀律與考核組 <span class="cnt">| 25 人</span>
           <span class="goal">目標：將工安表現納入適用期考核；違反公安者依情節處罰，情節重大予以解約。</span>
@@ -494,17 +453,17 @@
 
   <div id="matrix" class="tab-panel">
     <div class="matrix-wrap">
-      <div class="matrix-title">一、廠區目標管理與 HR 協同對齊矩陣</div>
+      <div class="matrix-title">一、BitMart 模式：廠區目標管理與 HR 協同對齊矩陣</div>
       <div class="matrix-desc">透過各部門目標對齊，確保化工廠產能、設備維護與工安法規全面落實。</div>
 
       <table class="matrix-table">
         <thead>
           <tr>
             <th style="width:11%;">組織層級</th>
-            <th class="th-front" style="width:22.25%;">生產與製程目標<span class="pdf-tag">PDF</span></th>
-            <th class="th-mid" style="width:22.25%;">品保與工安環保目標<span class="pdf-tag">PDF</span></th>
-            <th class="th-back" style="width:22.25%;">設備與倉管目標<span class="pdf-tag">PDF</span></th>
-            <th class="th-hrbp" style="width:22.25%;">人資與工安紀律目標<span class="pdf-tag">PDF</span></th>
+            <th class="th-front" style="width:22.25%;">生產製造目標 (Production)<span class="pdf-tag">PDF</span></th>
+            <th class="th-mid" style="width:22.25%;">品保與工安目標 (Quality &amp; Safety)<span class="pdf-tag">PDF</span></th>
+            <th class="th-back" style="width:22.25%;">設備與倉管目標 (Maintenance)<span class="pdf-tag">PDF</span></th>
+            <th class="th-hrbp" style="width:22.25%;">人資與勞安紀律目標 (HR &amp; Safety)<span class="pdf-tag">PDF</span></th>
           </tr>
         </thead>
         <tbody>
@@ -583,8 +542,8 @@
 
   <div id="matrix2" class="tab-panel">
     <div class="matrix-wrap">
-      <div class="matrix-title">二、Nano Tech 奈米科技化工廠專屬工安矩陣</div>
-      <div class="matrix-desc">具體呈現化工廠對於工安意識、證照回訓、導師培訓與違規解約機制的落實方式。</div>
+      <div class="matrix-title">二、Nano Tech 模式：化工廠工安與人員培訓對齊矩陣</div>
+      <div class="matrix-desc">具體呈現 Nano Tech 奈米科技化工廠對於工安意識、證照回訓、導師培訓與違規解約機制的落實方式。</div>
 
       <table class="matrix-table">
         <thead>
@@ -794,7 +753,7 @@
           <div class="body">工安落實良好，持續維持公安良好行為獎勵與導師培訓制度。</div>
         </div>
         <div class="legend-card yellow">
-          <div class="head"><span class="dot"></span>70 – 84 分（黃燈 - 預警狀態）</div>
+          <div class="head"><span class="dot"></span>70 – 84 分（黃燈 -預警狀態）</div>
           <div class="body">部分環節需加強海報宣導與不定期抽查頻率。</div>
         </div>
         <div class="legend-card red">
